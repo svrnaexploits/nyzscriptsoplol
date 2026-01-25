@@ -76,6 +76,33 @@
         .btn-copy { background: #fff; color: #000; }
         .btn-game { background: rgba(255,255,255,0.1); color: #fff; border: 1px solid white; }
         .btn:hover { opacity: 0.8; }
+
+        /* --- ADMIN UPLOAD BUTTON STYLE --- */
+        .admin-add-btn {
+            position: fixed; bottom: 30px; right: 30px;
+            width: 60px; height: 60px; background: white;
+            color: black; border-radius: 50%; border: none;
+            font-size: 30px; cursor: pointer; z-index: 100;
+            box-shadow: 0 0 20px rgba(255,255,255,0.3);
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        /* Admin Modal */
+        #adminModal {
+            display: none; position: fixed; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            background: #111; padding: 30px; border-radius: 20px;
+            z-index: 101; border: 1px solid #444; width: 90%; max-width: 400px;
+        }
+        #adminModal input {
+            width: 100%; padding: 10px; margin-bottom: 10px;
+            background: #222; border: 1px solid #444; color: white; border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .modal-overlay {
+            display: none; position: fixed; top:0; left:0; width:100%; height:100%;
+            background: rgba(0,0,0,0.8); z-index: 100;
+        }
     </style>
 </head>
 <body>
@@ -90,6 +117,7 @@
         </div>
 
         <div class="script-grid" id="scriptContainer">
+             <!-- YOUR SCRIPTS GO HERE -->
              <div class="script-card" data-name="Escape Tsunami For UGC">
                 <h3>Escape Tsunami For UGC</h3>
                 <p>Auto Delete Tsunamis Script</p>
@@ -101,7 +129,59 @@
         </div>
     </div>
 
+    <!-- ADMIN PANEL -->
+    <button class="admin-add-btn" onclick="openAdmin()">+</button>
+    <div class="modal-overlay" id="overlay" onclick="closeAdmin()"></div>
+    <div id="adminModal">
+        <h2 style="margin-top:0">Add New Script</h2>
+        <input type="text" id="newScriptName" placeholder="Script Name">
+        <input type="text" id="newScriptDesc" placeholder="Description">
+        <input type="text" id="newScriptCode" placeholder="Loadstring Code">
+        <input type="text" id="newGameLink" placeholder="Game Link URL">
+        <button class="btn btn-copy" style="width:100%" onclick="generateCode()">Generate Code</button>
+        <p style="font-size: 11px; color: #888; margin-top: 15px;">Copy the code from the alert and paste it into your index.html on GitHub.</p>
+    </div>
+
     <script>
+        // --- ADMIN LOGIC ---
+        function openAdmin() {
+            let pass = prompt("Enter Admin Password:");
+            if(pass === "nyz123") { // CHANGE THIS PASSWORD
+                document.getElementById('adminModal').style.display = 'block';
+                document.getElementById('overlay').style.display = 'block';
+            } else {
+                alert("Incorrect Password!");
+            }
+        }
+
+        function closeAdmin() {
+            document.getElementById('adminModal').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+
+        function generateCode() {
+            let name = document.getElementById('newScriptName').value;
+            let desc = document.getElementById('newScriptDesc').value;
+            let code = document.getElementById('newScriptCode').value;
+            let link = document.getElementById('newGameLink').value;
+
+            let htmlSnippet = `
+             <div class="script-card" data-name="${name}">
+                <h3>${name}</h3>
+                <p>${desc}</p>
+                <div class="btn-group">
+                    <button class="btn btn-copy" onclick="copyToClipboard('${code}')">Copy Script</button>
+                    <a href="${link}" target="_blank" class="btn btn-game">Game Link</a>
+                </div>
+             </div>`;
+            
+            console.log(htmlSnippet);
+            copyToClipboard(htmlSnippet);
+            alert("CODE GENERATED AND COPIED!\n\nPaste this into your index.html file on GitHub inside the 'scriptContainer' div.");
+            closeAdmin();
+        }
+
+        // --- EXISTING PARTICLE & SEARCH CODE ---
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
@@ -147,7 +227,7 @@
 
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text);
-            alert("Script copied to clipboard!");
+            alert("Copied to clipboard!");
         }
     </script>
 </body>
