@@ -1,123 +1,45 @@
+<!-- Replace your index.html with this -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NyzScripts</title>
+    <title>NyzScripts | Dashboard</title>
     <style>
         body, html {
             margin: 0; padding: 0; width: 100%; height: 100%;
             background-color: black; color: white;
             font-family: 'Segoe UI', sans-serif; overflow-x: hidden;
         }
-
-        #particle-canvas {
-            position: fixed; top: 0; left: 0;
-            width: 100%; height: 100%; z-index: 1;
-        }
-
-        .ui-layer {
-            position: relative; z-index: 2;
-            max-width: 1000px; margin: 0 auto; padding: 20px;
-        }
-
-        .logo {
-            font-size: 28px; font-weight: bold; letter-spacing: 2px;
-            margin-bottom: 50px;
-        }
-
-        .search-section {
-            display: flex; justify-content: center; margin-bottom: 50px;
-        }
-
-        .search-bar {
-            width: 100%; max-width: 500px;
-            padding: 15px 25px; border-radius: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            background: rgba(255, 255, 255, 0.05);
-            color: white; font-size: 18px; outline: none;
-            backdrop-filter: blur(10px); transition: 0.3s;
-        }
-
-        .search-bar:focus {
-            border-color: #fff; background: rgba(255, 255, 255, 0.1);
-        }
-
-        .script-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .script-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 20px; border-radius: 15px;
-            backdrop-filter: blur(10px);
-            transition: transform 0.2s;
-        }
-
-        .script-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(255, 255, 255, 0.4);
-        }
-
-        .script-card h3 { margin: 0 0 5px 0; font-size: 20px; color: #fff; }
-        .script-card p { margin: 0 0 15px 0; font-size: 14px; color: #bbb; }
-        
+        #particle-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+        .ui-layer { position: relative; z-index: 2; max-width: 1000px; margin: 0 auto; padding: 20px; }
+        .logo { font-size: 28px; font-weight: bold; letter-spacing: 2px; margin-bottom: 50px; }
+        .search-bar { width: 100%; max-width: 500px; padding: 15px 25px; border-radius: 30px; border: 1px solid rgba(255, 255, 255, 0.2); background: rgba(255, 255, 255, 0.05); color: white; font-size: 18px; outline: none; backdrop-filter: blur(10px); transition: 0.3s; margin: 0 auto; display: block; }
+        .script-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; margin-top: 50px; }
+        .script-card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); padding: 20px; border-radius: 15px; backdrop-filter: blur(10px); }
         .btn-group { display: flex; gap: 10px; }
-
-        .btn {
-            flex: 1; padding: 10px; border: none; border-radius: 5px;
-            cursor: pointer; font-weight: bold; transition: 0.3s;
-            text-align: center; text-decoration: none; font-size: 13px;
-        }
-
+        .btn { flex: 1; padding: 10px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; text-align: center; text-decoration: none; font-size: 13px; }
         .btn-copy { background: #fff; color: #000; }
         .btn-game { background: rgba(255,255,255,0.1); color: #fff; border: 1px solid white; }
-        .btn:hover { opacity: 0.8; }
 
-        /* --- ADMIN UPLOAD BUTTON STYLE --- */
-        .admin-add-btn {
-            position: fixed; bottom: 30px; right: 30px;
-            width: 60px; height: 60px; background: white;
-            color: black; border-radius: 50%; border: none;
-            font-size: 30px; cursor: pointer; z-index: 100;
-            box-shadow: 0 0 20px rgba(255,255,255,0.3);
-            display: flex; align-items: center; justify-content: center;
-        }
-
-        /* Admin Modal */
-        #adminModal {
-            display: none; position: fixed; top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            background: #111; padding: 30px; border-radius: 20px;
-            z-index: 101; border: 1px solid #444; width: 90%; max-width: 400px;
-        }
-        #adminModal input {
-            width: 100%; padding: 10px; margin-bottom: 10px;
-            background: #222; border: 1px solid #444; color: white; border-radius: 5px;
-            box-sizing: border-box;
-        }
-        .modal-overlay {
-            display: none; position: fixed; top:0; left:0; width:100%; height:100%;
-            background: rgba(0,0,0,0.8); z-index: 100;
-        }
+        /* FLOATING ADD BUTTON */
+        .add-btn { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background: white; color: black; border-radius: 50%; border: none; font-size: 30px; cursor: pointer; z-index: 100; }
+        
+        /* HIDDEN GENERATOR PANEL */
+        #genPanel { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #111; padding: 25px; border-radius: 15px; z-index: 1000; border: 1px solid #444; width: 350px; }
+        #genPanel input { width: 100%; padding: 10px; margin-bottom: 10px; background: #222; border: 1px solid #444; color: white; border-radius: 5px; box-sizing: border-box; }
+        .overlay { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.8); z-index: 999; }
     </style>
 </head>
 <body>
-
     <canvas id="particle-canvas"></canvas>
 
     <div class="ui-layer">
         <div class="logo">NyzScripts</div>
-
-        <div class="search-section">
-            <input type="text" id="searchInput" class="search-bar" placeholder="Search scripts..." onkeyup="filterScripts()">
-        </div>
-
+        <input type="text" id="searchInput" class="search-bar" placeholder="Search scripts..." onkeyup="filterScripts()">
+        
         <div class="script-grid" id="scriptContainer">
-             <!-- YOUR SCRIPTS GO HERE -->
+             <!-- SCRIPT 1 -->
              <div class="script-card" data-name="Escape Tsunami For UGC">
                 <h3>Escape Tsunami For UGC</h3>
                 <p>Auto Delete Tsunamis Script</p>
@@ -129,92 +51,38 @@
         </div>
     </div>
 
-    <!-- ADMIN PANEL -->
-    <button class="admin-add-btn" onclick="openAdmin()">+</button>
-    <div class="modal-overlay" id="overlay" onclick="closeAdmin()"></div>
-    <div id="adminModal">
-        <h2 style="margin-top:0">Add New Script</h2>
-        <input type="text" id="newScriptName" placeholder="Script Name">
-        <input type="text" id="newScriptDesc" placeholder="Description">
-        <input type="text" id="newScriptCode" placeholder="Loadstring Code">
-        <input type="text" id="newGameLink" placeholder="Game Link URL">
-        <button class="btn btn-copy" style="width:100%" onclick="generateCode()">Generate Code</button>
-        <p style="font-size: 11px; color: #888; margin-top: 15px;">Copy the code from the alert and paste it into your index.html on GitHub.</p>
+    <!-- ADMIN TOOL -->
+    <button class="add-btn" onclick="toggleGen()">+</button>
+    <div class="overlay" id="overlay" onclick="toggleGen()"></div>
+    <div id="genPanel">
+        <h3>Script Generator</h3>
+        <input type="text" id="n" placeholder="Script Name">
+        <input type="text" id="d" placeholder="Description">
+        <input type="text" id="c" placeholder="Loadstring Code">
+        <input type="text" id="l" placeholder="Game Link">
+        <button class="btn btn-copy" style="width:100%" onclick="gen()">Generate & Copy Code</button>
     </div>
 
     <script>
-        // --- ADMIN LOGIC ---
-        function openAdmin() {
-            let pass = prompt("Enter Admin Password:");
-            if(pass === "nyz123") { // CHANGE THIS PASSWORD
-                document.getElementById('adminModal').style.display = 'block';
-                document.getElementById('overlay').style.display = 'block';
-            } else {
-                alert("Incorrect Password!");
-            }
+        function toggleGen() {
+            let p = document.getElementById('genPanel');
+            let o = document.getElementById('overlay');
+            let display = p.style.display === 'block' ? 'none' : 'block';
+            p.style.display = display; o.style.display = display;
         }
 
-        function closeAdmin() {
-            document.getElementById('adminModal').style.display = 'none';
-            document.getElementById('overlay').style.display = 'none';
+        function gen() {
+            let name = document.getElementById('n').value;
+            let desc = document.getElementById('d').value;
+            let code = document.getElementById('c').value;
+            let link = document.getElementById('l').value;
+            let html = `<div class="script-card" data-name="${name}"><h3>${name}</h3><p>${desc}</p><div class="btn-group"><button class="btn btn-copy" onclick="copyToClipboard('${code}')">Copy Script</button><a href="${link}" target="_blank" class="btn btn-game">Game Link</a></div></div>`;
+            navigator.clipboard.writeText(html);
+            alert("CODE COPIED! Now go to GitHub, edit index.html, and paste it under the last script card.");
+            toggleGen();
         }
 
-        function generateCode() {
-            let name = document.getElementById('newScriptName').value;
-            let desc = document.getElementById('newScriptDesc').value;
-            let code = document.getElementById('newScriptCode').value;
-            let link = document.getElementById('newGameLink').value;
-
-            let htmlSnippet = `
-             <div class="script-card" data-name="${name}">
-                <h3>${name}</h3>
-                <p>${desc}</p>
-                <div class="btn-group">
-                    <button class="btn btn-copy" onclick="copyToClipboard('${code}')">Copy Script</button>
-                    <a href="${link}" target="_blank" class="btn btn-game">Game Link</a>
-                </div>
-             </div>`;
-            
-            console.log(htmlSnippet);
-            copyToClipboard(htmlSnippet);
-            alert("CODE GENERATED AND COPIED!\n\nPaste this into your index.html file on GitHub inside the 'scriptContainer' div.");
-            closeAdmin();
-        }
-
-        // --- EXISTING PARTICLE & SEARCH CODE ---
-        const canvas = document.getElementById('particle-canvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-        window.addEventListener('resize', resize);
-        resize();
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 0.5;
-                this.speedX = Math.random() * 1 - 0.5;
-                this.speedY = Math.random() * 1 - 0.5;
-            }
-            update() {
-                this.x += this.speedX; this.y += this.speedY;
-                if (this.x > canvas.width) this.x = 0; else if (this.x < 0) this.x = canvas.width;
-                if (this.y > canvas.height) this.y = 0; else if (this.y < 0) this.y = canvas.height;
-            }
-            draw() {
-                ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
-                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
-            }
-        }
-
-        function init() { for (let i = 0; i < 80; i++) { particles.push(new Particle()); } }
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => { p.update(); p.draw(); });
-            requestAnimationFrame(animate);
-        }
-        init(); animate();
+        function copyToClipboard(t) { navigator.clipboard.writeText(t); alert("Copied!"); }
 
         function filterScripts() {
             let input = document.getElementById('searchInput').value.toLowerCase();
@@ -225,10 +93,24 @@
             }
         }
 
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text);
-            alert("Copied to clipboard!");
+        // Particles
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let pts = [];
+        function res() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.onresize = res; res();
+        for(let i=0;i<80;i++) pts.push({x:Math.random()*canvas.width, y:Math.random()*canvas.height, sx:Math.random()-0.5, sy:Math.random()-0.5});
+        function draw() {
+            ctx.clearRect(0,0,canvas.width,canvas.height); ctx.fillStyle='rgba(255,255,255,0.3)';
+            pts.forEach(p => {
+                p.x+=p.sx; p.y+=p.sy;
+                if(p.x<0)p.x=canvas.width; if(p.x>canvas.width)p.x=0;
+                if(p.y<0)p.y=canvas.height; if(p.y>canvas.height)p.y=0;
+                ctx.beginPath(); ctx.arc(p.x,p.y,1,0,Math.PI*2); ctx.fill();
+            });
+            requestAnimationFrame(draw);
         }
+        draw();
     </script>
 </body>
 </html>
