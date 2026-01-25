@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NyzScripts</title>
+    <style>
+        body, html {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            background-color: black; color: white;
+            font-family: 'Segoe UI', sans-serif; overflow-x: hidden;
+        }
+
+        #particle-canvas {
+            position: fixed; top: 0; left: 0;
+            width: 100%; height: 100%; z-index: 1;
+        }
+
+        .ui-layer {
+            position: relative; z-index: 2;
+            max-width: 1000px; margin: 0 auto; padding: 20px;
+        }
+
+        .logo {
+            font-size: 28px; font-weight: bold; letter-spacing: 2px;
+            margin-bottom: 50px;
+        }
+
+        .search-section {
+            display: flex; justify-content: center; margin-bottom: 50px;
+        }
+
+        .search-bar {
+            width: 100%; max-width: 500px;
+            padding: 15px 25px; border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            color: white; font-size: 18px; outline: none;
+            backdrop-filter: blur(10px); transition: 0.3s;
+        }
+
+        .search-bar:focus {
+            border-color: #fff; background: rgba(255, 255, 255, 0.1);
+        }
+
+        .script-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .script-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px; border-radius: 15px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.2s;
+        }
+
+        .script-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .script-card h3 { margin: 0 0 5px 0; font-size: 20px; color: #fff; }
+        .script-card p { margin: 0 0 15px 0; font-size: 14px; color: #bbb; }
+        
+        .btn-group { display: flex; gap: 10px; }
+
+        .btn {
+            flex: 1; padding: 10px; border: none; border-radius: 5px;
+            cursor: pointer; font-weight: bold; transition: 0.3s;
+            text-align: center; text-decoration: none; font-size: 13px;
+        }
+
+        .btn-copy { background: #fff; color: #000; }
+        .btn-game { background: rgba(255,255,255,0.1); color: #fff; border: 1px solid white; }
+        .btn:hover { opacity: 0.8; }
+    </style>
+</head>
+<body>
+
+    <canvas id="particle-canvas"></canvas>
+
+    <div class="ui-layer">
+        <div class="logo">NyzScripts</div>
+
+        <div class="search-section">
+            <input type="text" id="searchInput" class="search-bar" placeholder="Search scripts..." onkeyup="filterScripts()">
+        </div>
+
+        <div class="script-grid" id="scriptContainer">
+             <div class="script-card" data-name="Escape Tsunami For UGC">
+                <h3>Escape Tsunami For UGC</h3>
+                <p>Auto Delete Tsunamis Script</p>
+                <div class="btn-group">
+                    <button class="btn btn-copy" onclick="copyToClipboard('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/asuza999/ugc/refs/heads/main/autodeletetsunamis.lua.txt\'))()')">Copy Script</button>
+                    <a href="https://www.roblox.com/games/98999164981806/Escape-Tsunami-For-UGC" target="_blank" class="btn btn-game">Game Link</a>
+                </div>
+             </div>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = Math.random() * 1 - 0.5;
+                this.speedY = Math.random() * 1 - 0.5;
+            }
+            update() {
+                this.x += this.speedX; this.y += this.speedY;
+                if (this.x > canvas.width) this.x = 0; else if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0; else if (this.y < 0) this.y = canvas.height;
+            }
+            draw() {
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
+            }
+        }
+
+        function init() { for (let i = 0; i < 80; i++) { particles.push(new Particle()); } }
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animate);
+        }
+        init(); animate();
+
+        function filterScripts() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.getElementsByClassName('script-card');
+            for (let card of cards) {
+                let name = card.getAttribute('data-name').toLowerCase();
+                card.style.display = name.includes(input) ? "block" : "none";
+            }
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text);
+            alert("Script copied to clipboard!");
+        }
+    </script>
+</body>
+</html>
