@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Official Nyz Scripts Website</title>
+
 <style>
 body,html{margin:0;padding:0;width:100%;height:100%;background:black;color:white;font-family:'Segoe UI',sans-serif;overflow-x:hidden}
 #particle-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1}
@@ -29,7 +30,6 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:black;color:white
 .dropdown-item{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:13px;color:#ccc}
 .btn-small{padding:6px 12px;font-size:12px;flex:none}
 
-/* CAPTCHA CSS */
 #captcha-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:9999;display:flex;justify-content:center;align-items:center;backdrop-filter:blur(5px)}
 .captcha-box{background:#111;padding:30px;border-radius:10px;border:1px solid #333;text-align:center;box-shadow:0 0 50px rgba(0,0,0,0.8);width:300px}
 .captcha-header{font-size:20px;font-weight:bold;margin-bottom:15px;color:#fff}
@@ -40,25 +40,38 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:black;color:white
 .captcha-info{font-size:12px;color:#888;margin-top:10px}
 </style>
 </head>
+
 <body>
 
 <div id="captcha-overlay">
-    <div class="captcha-box">
-        <div class="captcha-header">Security Check</div>
-        <canvas id="captcha-canvas" width="200" height="60" onclick="generateCaptcha()"></canvas>
-        <input type="text" id="captcha-input" class="captcha-input" placeholder="Enter code" autocomplete="off">
-        <button class="captcha-btn" onclick="checkCaptcha()">Verify</button>
-        <div class="captcha-info">Click image to refresh</div>
-    </div>
+<div class="captcha-box">
+<div class="captcha-header">Security Check</div>
+<canvas id="captcha-canvas" width="200" height="60" onclick="generateCaptcha()"></canvas>
+<input type="text" id="captcha-input" class="captcha-input" placeholder="Enter code" autocomplete="off">
+<button class="captcha-btn" onclick="checkCaptcha()">Verify</button>
+<div class="captcha-info">Click image to refresh</div>
+</div>
 </div>
 
 <canvas id="particle-canvas"></canvas>
+
 <div class="ui-layer" id="main-content">
 <div class="logo">NYZ SCRIPTS</div>
+
 <div class="search-section">
 <input type="text" id="searchInput" class="search-bar" placeholder="Search scripts..." onkeyup="filterScripts()">
 </div>
+
 <div class="script-grid" id="scriptContainer">
+
+<div class="script-card" data-name="Paid Instant UGC">
+<h3>Paid Instant UGC</h3>
+<p>💎PAID INSTANT</p>
+<div class="btn-group">
+<button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet('https://raw.githubusercontent.com/asuza999/paidinstantalwi/refs/heads/main/paidinstantugcwalwibtw.lua.txt'))()">Copy Script</button>
+<a href="https://www.roblox.com/games/111077326659419" target="_blank" class="btn btn-game">Game Link</a>
+</div>
+</div>
 
 <div class="script-card" data-name="Strongman Simulator">
 <h3>Strongman Simulator</h3>
@@ -85,13 +98,13 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:black;color:white
 </div>
 <p>⭐KEYLESS</p>
 <div class="btn-group">
-<button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet(&quot;https://raw.githubusercontent.com/asuza999/nyzontop/refs/heads/main/proximityprompt.lua.txt&quot;))()">Copy Script</button>
+<button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet('https://raw.githubusercontent.com/asuza999/nyzontop/refs/heads/main/proximityprompt.lua.txt'))()">Copy Script</button>
 <a href="https://www.roblox.com/games/121573674290343/Taptors-UGC-Item-Claims" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 <div class="dropdown-content">
-<div class="dropdown-item"><span>Follow</span><button class="btn btn-copy btn-small" onclick="event.stopPropagation(); copyLink('https://www.roblox.com/users/4102344319/profile')">Copy Link</button></div>
-<div class="dropdown-item"><span>Join Group</span><button class="btn btn-copy btn-small" onclick="event.stopPropagation(); copyLink('https://www.roblox.com/communities/17260696/LOS-GIGA-PANAS#!/store')">Copy Link</button></div>
-<div class="dropdown-item"><span>Join Group</span><button class="btn btn-copy btn-small" onclick="event.stopPropagation(); copyLink('https://www.roblox.com/communities/34014348/Taptors-UGC#!/about')">Copy Link</button></div>
+<div class="dropdown-item"><span>Follow</span><button class="btn btn-copy btn-small" onclick="copyLink('https://www.roblox.com/users/4102344319/profile')">Copy Link</button></div>
+<div class="dropdown-item"><span>Join Group</span><button class="btn btn-copy btn-small" onclick="copyLink('https://www.roblox.com/communities/17260696/LOS-GIGA-PANAS#!/store')">Copy Link</button></div>
+<div class="dropdown-item"><span>Join Group</span><button class="btn btn-copy btn-small" onclick="copyLink('https://www.roblox.com/communities/34014348/Taptors-UGC#!/about')">Copy Link</button></div>
 </div>
 </div>
 
@@ -110,15 +123,6 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:black;color:white
 <div class="btn-group">
 <button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()">Copy Script</button>
 <a href="https://www.roblox.com/games/140422012851942/Helios-Cinema-Tycoon" target="_blank" class="btn btn-game">Game Link</a>
-</div>
-</div>
-
-<div class="script-card" data-name="Paradise RP">
-<h3>Paradise RP</h3>
-<p>🚀INSTANT UGC</p>
-<div class="btn-group">
-<button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet('https://pastefy.app/PmlvkcgZ/raw'))()">Copy Script</button>
-<a href="https://www.roblox.com/games/13421266463/Paradise-RP" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
 
@@ -171,62 +175,25 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:black;color:white
 </div>
 
 <script>
-let captchaValue = "";
-function generateCaptcha() {
-    let canvas = document.getElementById("captcha-canvas");
-    let ctx = canvas.getContext("2d");
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    let chars = "ABCDEFGHJKLMNOPQRSTUVWXYZ0123456789";
-    captchaValue = "";
-    for(let i=0; i<7; i++) {
-        ctx.beginPath();
-        ctx.moveTo(Math.random()*canvas.width, Math.random()*canvas.height);
-        ctx.lineTo(Math.random()*canvas.width, Math.random()*canvas.height);
-        ctx.strokeStyle = "rgba(255,255,255,0.2)";
-        ctx.lineWidth = 2;
-        ctx.stroke();
-    }
-    for (let i = 0; i < 5; i++) {
-        let char = chars[Math.floor(Math.random() * chars.length)];
-        captchaValue += char;
-        ctx.font = "bold 30px Arial";
-        ctx.fillStyle = "#fff";
-        let x = 30 + (i * 30);
-        let y = 40 + (Math.random() * 10 - 5);
-        let angle = (Math.random() * 0.4) - 0.2;
-        ctx.save();
-        ctx.translate(x, y);
-        ctx.rotate(angle);
-        ctx.fillText(char, 0, 0);
-        ctx.restore();
-    }
-}
-function checkCaptcha() {
-    let input = document.getElementById("captcha-input").value.toUpperCase();
-    if (input === captchaValue) {
-        document.getElementById("captcha-overlay").style.display = "none";
-        document.getElementById("main-content").classList.add("unlocked");
-    } else {
-        alert("Incorrect Code. Try again.");
-        document.getElementById("captcha-input").value = "";
-        generateCaptcha();
-    }
-}
-generateCaptcha();
-const canvas=document.getElementById('particle-canvas')
-const ctx=canvas.getContext('2d')
+let captchaValue=""
+function generateCaptcha(){let c=document.getElementById("captcha-canvas"),x=c.getContext("2d");x.clearRect(0,0,c.width,c.height);let ch="ABCDEFGHJKLMNOPQRSTUVWXYZ0123456789";captchaValue="";for(let i=0;i<7;i++){x.beginPath();x.moveTo(Math.random()*c.width,Math.random()*c.height);x.lineTo(Math.random()*c.width,Math.random()*c.height);x.strokeStyle="rgba(255,255,255,0.2)";x.lineWidth=2;x.stroke()}for(let i=0;i<5;i++){let r=ch[Math.floor(Math.random()*ch.length)];captchaValue+=r;x.font="bold 30px Arial";x.fillStyle="#fff";let px=30+i*30,py=40+(Math.random()*10-5),a=Math.random()*0.4-0.2;x.save();x.translate(px,py);x.rotate(a);x.fillText(r,0,0);x.restore()}}
+function checkCaptcha(){let i=document.getElementById("captcha-input").value.toUpperCase();if(i===captchaValue){document.getElementById("captcha-overlay").style.display="none";document.getElementById("main-content").classList.add("unlocked")}else{alert("Incorrect Code. Try again.");document.getElementById("captcha-input").value="";generateCaptcha()}}
+generateCaptcha()
+
+const canvas=document.getElementById("particle-canvas"),ctx=canvas.getContext("2d")
 let particles=[]
 function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight}
-window.addEventListener('resize',resize)
-resize()
-class Particle{constructor(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.size=Math.random()*2+.5;this.speedX=Math.random()*1-.5;this.speedY=Math.random()*1-.5}update(){this.x+=this.speedX;this.y+=this.speedY;if(this.x>canvas.width)this.x=0;else if(this.x<0)this.x=canvas.width;if(this.y>canvas.height)this.y=0;else if(this.y<0)this.y=canvas.height}draw(){ctx.fillStyle='rgba(255,255,255,0.4)';ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.fill()}}
+window.addEventListener("resize",resize);resize()
+class Particle{constructor(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.size=Math.random()*2+.5;this.speedX=Math.random()*1-.5;this.speedY=Math.random()*1-.5}update(){this.x+=this.speedX;this.y+=this.speedY;if(this.x>canvas.width)this.x=0;else if(this.x<0)this.x=canvas.width;if(this.y>canvas.height)this.y=0;else if(this.y<0)this.y=canvas.height}draw(){ctx.fillStyle="rgba(255,255,255,0.4)";ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.fill()}}
 function init(){for(let i=0;i<80;i++)particles.push(new Particle())}
 function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach(p=>{p.update();p.draw()});requestAnimationFrame(animate)}
 init();animate()
-function filterScripts(){let input=document.getElementById('searchInput').value.toLowerCase();let cards=document.getElementsByClassName('script-card');for(let card of cards){let name=card.getAttribute('data-name').toLowerCase();card.style.display=name.includes(input)?"block":"none"}}
-function copyScript(btn){const script=btn.getAttribute('data-script');navigator.clipboard.writeText(script);alert("Script copied to clipboard!")}
-function copyLink(url){navigator.clipboard.writeText(url);alert("Link copied to clipboard!")}
-function toggleDropdown(el){const card=el.closest('.script-card');const content=card.querySelector('.dropdown-content');if(!content)return;const isOpen=content.style.display==="block";content.style.display=isOpen?"none":"block";el.classList.toggle("open",!isOpen)}
+
+function filterScripts(){let i=document.getElementById("searchInput").value.toLowerCase(),c=document.getElementsByClassName("script-card");for(let k of c){let n=k.getAttribute("data-name").toLowerCase();k.style.display=n.includes(i)?"block":"none"}}
+function copyScript(b){navigator.clipboard.writeText(b.getAttribute("data-script"));alert("Script copied to clipboard!")}
+function copyLink(u){navigator.clipboard.writeText(u);alert("Link copied to clipboard!")}
+function toggleDropdown(e){const c=e.closest(".script-card").querySelector(".dropdown-content");const o=c.style.display==="block";c.style.display=o?"none":"block";e.classList.toggle("open",!o)}
 </script>
+
 </body>
 </html>
