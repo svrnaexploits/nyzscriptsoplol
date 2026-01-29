@@ -7,7 +7,8 @@
 <style>
 body,html{margin:0;padding:0;width:100%;height:100%;background:black;color:white;font-family:'Segoe UI',sans-serif;overflow-x:hidden}
 #particle-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1}
-.ui-layer{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:20px}
+.ui-layer{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:20px;filter:blur(10px);pointer-events:none;transition:filter .5s, opacity .5s;opacity:0.3}
+.ui-layer.unlocked{filter:none;pointer-events:auto;opacity:1}
 .logo{font-size:24px;font-weight:bold;letter-spacing:2px;color:#fff;text-shadow:0 0 10px rgba(255,255,255,.5);margin-top:10px;margin-bottom:40px}
 .search-section{display:flex;justify-content:center;margin-bottom:50px}
 .search-bar{width:100%;max-width:500px;padding:15px 25px;border-radius:30px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.05);color:white;font-size:18px;outline:none;backdrop-filter:blur(10px);transition:.3s}
@@ -27,11 +28,33 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:black;color:white
 .dropdown-content{display:none;margin-top:15px;border-top:1px solid rgba(255,255,255,.15);padding-top:10px}
 .dropdown-item{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:13px;color:#ccc}
 .btn-small{padding:6px 12px;font-size:12px;flex:none}
+
+/* CAPTCHA CSS */
+#captcha-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:9999;display:flex;justify-content:center;align-items:center;backdrop-filter:blur(5px)}
+.captcha-box{background:#111;padding:30px;border-radius:10px;border:1px solid #333;text-align:center;box-shadow:0 0 50px rgba(0,0,0,0.8);width:300px}
+.captcha-header{font-size:20px;font-weight:bold;margin-bottom:15px;color:#fff}
+#captcha-canvas{background:#222;margin-bottom:15px;border-radius:5px;cursor:pointer}
+.captcha-input{width:100%;padding:10px;margin-bottom:15px;background:#333;border:1px solid #444;color:white;border-radius:5px;box-sizing:border-box;text-align:center;font-size:16px}
+.captcha-btn{width:100%;padding:10px;background:white;color:black;border:none;border-radius:5px;font-weight:bold;cursor:pointer;transition:.2s}
+.captcha-btn:hover{opacity:0.8}
+.captcha-info{font-size:12px;color:#888;margin-top:10px}
 </style>
 </head>
 <body>
+
+<!-- CAPTCHA HTML -->
+<div id="captcha-overlay">
+    <div class="captcha-box">
+        <div class="captcha-header">Security Check</div>
+        <canvas id="captcha-canvas" width="200" height="60" onclick="generateCaptcha()"></canvas>
+        <input type="text" id="captcha-input" class="captcha-input" placeholder="Enter code" autocomplete="off">
+        <button class="captcha-btn" onclick="checkCaptcha()">Verify</button>
+        <div class="captcha-info">Click image to refresh</div>
+    </div>
+</div>
+
 <canvas id="particle-canvas"></canvas>
-<div class="ui-layer">
+<div class="ui-layer" id="main-content">
 <div class="logo">NYZ SCRIPTS</div>
 <div class="search-section">
 <input type="text" id="searchInput" class="search-bar" placeholder="Search scripts..." onkeyup="filterScripts()">
@@ -140,6 +163,56 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:black;color:white
 </div>
 
 <script>
+// CAPTCHA LOGIC
+let captchaValue = "";
+function generateCaptcha() {
+    let canvas = document.getElementById("captcha-canvas");
+    let ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let chars = "ABCDEFGHJKLMNOPQRSTUVWXYZ0123456789";
+    captchaValue = "";
+    
+    // Add noise lines
+    for(let i=0; i<7; i++) {
+        ctx.beginPath();
+        ctx.moveTo(Math.random()*canvas.width, Math.random()*canvas.height);
+        ctx.lineTo(Math.random()*canvas.width, Math.random()*canvas.height);
+        ctx.strokeStyle = "rgba(255,255,255,0.2)";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+    }
+
+    // Draw characters
+    for (let i = 0; i < 5; i++) {
+        let char = chars[Math.floor(Math.random() * chars.length)];
+        captchaValue += char;
+        ctx.font = "bold 30px Arial";
+        ctx.fillStyle = "#fff";
+        let x = 30 + (i * 30);
+        let y = 40 + (Math.random() * 10 - 5);
+        let angle = (Math.random() * 0.4) - 0.2;
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(angle);
+        ctx.fillText(char, 0, 0);
+        ctx.restore();
+    }
+}
+
+function checkCaptcha() {
+    let input = document.getElementById("captcha-input").value.toUpperCase();
+    if (input === captchaValue) {
+        document.getElementById("captcha-overlay").style.display = "none";
+        document.getElementById("main-content").classList.add("unlocked");
+    } else {
+        alert("Incorrect Code. Try again.");
+        document.getElementById("captcha-input").value = "";
+        generateCaptcha();
+    }
+}
+generateCaptcha(); // Start immediately
+
+// SITE LOGIC
 const canvas=document.getElementById('particle-canvas')
 const ctx=canvas.getContext('2d')
 let particles=[]
