@@ -42,7 +42,6 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:black;color:white
 </head>
 <body>
 
-<!-- CAPTCHA HTML -->
 <div id="captcha-overlay">
     <div class="captcha-box">
         <div class="captcha-header">Security Check</div>
@@ -60,6 +59,15 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:black;color:white
 <input type="text" id="searchInput" class="search-bar" placeholder="Search scripts..." onkeyup="filterScripts()">
 </div>
 <div class="script-grid" id="scriptContainer">
+
+<div class="script-card" data-name="Strongman Simulator">
+<h3>Strongman Simulator</h3>
+<p>🚀INSTANT UGC</p>
+<div class="btn-group">
+<button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet('https://raw.githubusercontent.com/svrnaexploits/nyzscripts/refs/heads/main/instant'))()">Copy Script</button>
+<a href="https://www.roblox.com/games/6766156863/Strongman-Simulator" target="_blank" class="btn btn-game">Game Link</a>
+</div>
+</div>
 
 <div class="script-card" data-name="Paradise RP">
 <h3>Paradise RP</h3>
@@ -163,7 +171,6 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:black;color:white
 </div>
 
 <script>
-// CAPTCHA LOGIC
 let captchaValue = "";
 function generateCaptcha() {
     let canvas = document.getElementById("captcha-canvas");
@@ -171,8 +178,6 @@ function generateCaptcha() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     let chars = "ABCDEFGHJKLMNOPQRSTUVWXYZ0123456789";
     captchaValue = "";
-    
-    // Add noise lines
     for(let i=0; i<7; i++) {
         ctx.beginPath();
         ctx.moveTo(Math.random()*canvas.width, Math.random()*canvas.height);
@@ -181,8 +186,6 @@ function generateCaptcha() {
         ctx.lineWidth = 2;
         ctx.stroke();
     }
-
-    // Draw characters
     for (let i = 0; i < 5; i++) {
         let char = chars[Math.floor(Math.random() * chars.length)];
         captchaValue += char;
@@ -198,7 +201,6 @@ function generateCaptcha() {
         ctx.restore();
     }
 }
-
 function checkCaptcha() {
     let input = document.getElementById("captcha-input").value.toUpperCase();
     if (input === captchaValue) {
@@ -210,9 +212,7 @@ function checkCaptcha() {
         generateCaptcha();
     }
 }
-generateCaptcha(); // Start immediately
-
-// SITE LOGIC
+generateCaptcha();
 const canvas=document.getElementById('particle-canvas')
 const ctx=canvas.getContext('2d')
 let particles=[]
