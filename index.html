@@ -170,7 +170,7 @@ generateCaptcha()
 const canvas=document.getElementById("particle-canvas"),ctx=canvas.getContext("2d")
 canvas.width=innerWidth;canvas.height=innerHeight
 let p=[]
-for(let i=0;i<80;i++)p.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,vx:Math.random()-0.5,vy:Math.random()-0.5})
+for(let i=0;i<80;i++)p.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,vx:Math.random()-.5,vy:Math.random()-.5})
 function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);p.forEach(o=>{o.x+=o.vx;o.y+=o.vy;if(o.x<0)o.x=canvas.width;if(o.x>canvas.width)o.x=0;if(o.y<0)o.y=canvas.height;if(o.y>canvas.height)o.y=0;ctx.fillStyle="rgba(255,255,255,.4)";ctx.beginPath();ctx.arc(o.x,o.y,1.5,0,Math.PI*2);ctx.fill()});requestAnimationFrame(animate)}
 animate()
 function filterScripts(){const v=searchInput.value.toLowerCase();document.querySelectorAll(".script-card").forEach(c=>c.style.display=c.dataset.name.toLowerCase().includes(v)?"block":"none")}
