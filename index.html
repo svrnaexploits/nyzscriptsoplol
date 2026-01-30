@@ -7,208 +7,176 @@
 <style>
 body,html{margin:0;padding:0;width:100%;height:100%;background:black;color:white;font-family:'Segoe UI',sans-serif;overflow-x:hidden}
 #particle-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1}
-.ui-layer{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:20px;filter:blur(10px);pointer-events:none;transition:filter .5s, opacity .5s;opacity:0.3}
+.ui-layer{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:20px;filter:blur(10px);pointer-events:none;transition:filter .5s,opacity .5s;opacity:.3}
 .ui-layer.unlocked{filter:none;pointer-events:auto;opacity:1}
-.logo{font-size:24px;font-weight:bold;letter-spacing:2px;color:#fff;text-shadow:0 0 10px rgba(255,255,255,.5);margin-top:10px;margin-bottom:40px}
+.logo{font-size:24px;font-weight:bold;letter-spacing:2px;margin:10px 0 40px}
 .search-section{display:flex;justify-content:center;margin-bottom:50px}
-.search-bar{width:100%;max-width:500px;padding:15px 25px;border-radius:30px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.05);color:white;font-size:18px;outline:none;backdrop-filter:blur(10px);transition:.3s}
-.search-bar:focus{border-color:#fff;background:rgba(255,255,255,.1)}
-.script-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;align-items:start}
-.script-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);padding:20px;border-radius:15px;backdrop-filter:blur(10px);transition:transform .2s,border-color .2s}
-.script-card:hover{transform:translateY(-5px);border-color:rgba(255,255,255,.5)}
-.script-card h3{margin:0 0 5px 0;font-size:20px;color:#fff}
-.script-card p{margin:0 0 15px 0;font-size:14px;color:#bbb;height:40px;overflow:hidden}
+.search-bar{width:100%;max-width:500px;padding:15px 25px;border-radius:30px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.05);color:white;font-size:18px;outline:none}
+.script-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+.script-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);padding:20px;border-radius:15px}
+.script-card h3{margin:0 0 5px}
+.script-card p{margin:0 0 15px;font-size:14px;color:#bbb}
 .btn-group{display:flex;gap:10px}
-.btn{flex:1;padding:10px;border:none;border-radius:5px;cursor:pointer;font-weight:bold;transition:.3s;text-align:center;text-decoration:none;font-size:13px}
+.btn{flex:1;padding:10px;border:none;border-radius:5px;font-weight:bold;cursor:pointer;font-size:13px}
 .btn-copy{background:#fff;color:#000}
-.btn-game{background:rgba(255,255,255,.1);color:#fff;border:1px solid white}
-.btn:hover{opacity:.8}
-.dropdown-toggle{cursor:pointer;font-size:14px;transition:transform .3s;user-select:none}
-.dropdown-toggle.open{transform:rotate(90deg)}
+.btn-game{background:rgba(255,255,255,.1);color:#fff;border:1px solid #fff;text-decoration:none;text-align:center}
+.dropdown-toggle{cursor:pointer}
 .dropdown-content{display:none;margin-top:15px;border-top:1px solid rgba(255,255,255,.15);padding-top:10px}
-.dropdown-item{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:13px;color:#ccc}
-.btn-small{padding:6px 12px;font-size:12px;flex:none}
-#captcha-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:9999;display:flex;justify-content:center;align-items:center;backdrop-filter:blur(5px)}
-.captcha-box{background:#111;padding:30px;border-radius:10px;border:1px solid #333;text-align:center;box-shadow:0 0 50px rgba(0,0,0,0.8);width:300px}
-.captcha-header{font-size:20px;font-weight:bold;margin-bottom:15px;color:#fff}
-#captcha-canvas{background:#222;margin-bottom:15px;border-radius:5px;cursor:pointer}
-.captcha-input{width:100%;padding:10px;margin-bottom:15px;background:#333;border:1px solid #444;color:white;border-radius:5px;box-sizing:border-box;text-align:center;font-size:16px}
-.captcha-btn{width:100%;padding:10px;background:white;color:black;border:none;border-radius:5px;font-weight:bold;cursor:pointer;transition:.2s}
-.captcha-btn:hover{opacity:0.8}
-.captcha-info{font-size:12px;color:#888;margin-top:10px}
+.dropdown-item{display:flex;justify-content:space-between;margin-bottom:8px;font-size:13px}
+.btn-small{padding:6px 12px;font-size:12px}
+#captcha-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.8);z-index:9999;display:flex;justify-content:center;align-items:center}
+.captcha-box{background:#111;padding:30px;border-radius:10px;border:1px solid #333;width:300px;text-align:center}
+#captcha-canvas{background:#222;margin-bottom:15px;cursor:pointer}
+.captcha-input{width:100%;padding:10px;margin-bottom:15px;background:#333;border:1px solid #444;color:white}
+.captcha-btn{width:100%;padding:10px;background:white;color:black;border:none;font-weight:bold}
 </style>
 </head>
 <body>
+
 <div id="captcha-overlay">
 <div class="captcha-box">
-<div class="captcha-header">Security Check</div>
 <canvas id="captcha-canvas" width="200" height="60" onclick="generateCaptcha()"></canvas>
-<input type="text" id="captcha-input" class="captcha-input" placeholder="Enter code" autocomplete="off">
+<input id="captcha-input" class="captcha-input" placeholder="Enter code">
 <button class="captcha-btn" onclick="checkCaptcha()">Verify</button>
-<div class="captcha-info">Click image to refresh</div>
 </div>
 </div>
+
 <canvas id="particle-canvas"></canvas>
+
 <div class="ui-layer" id="main-content">
 <div class="logo">NYZ SCRIPTS</div>
+
 <div class="search-section">
-<input type="text" id="searchInput" class="search-bar" placeholder="Search scripts..." onkeyup="filterScripts()">
+<input class="search-bar" id="searchInput" placeholder="Search scripts..." onkeyup="filterScripts()">
 </div>
-<div class="script-grid" id="scriptContainer">
-  
+
+<div class="script-grid">
+
 <div class="script-card" data-name="Pop Box">
-<h3>Pop Box</h3>
-<p>⭐KEYLESS</p>
+<h3>Pop Box</h3><p>⭐KEYLESS</p>
 <div class="btn-group">
 <button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet('https://raw.githubusercontent.com/asuza999/pop/refs/heads/main/popbox.lua.txt'))()">Copy Script</button>
-<a href="https://www.roblox.com/games/112184852457409/Pop-Box" target="_blank" class="btn btn-game">Game Link</a>
-</div>
-</div>
+<a class="btn btn-game" target="_blank" href="https://www.roblox.com/games/112184852457409/Pop-Box">Game Link</a>
+</div></div>
 
 <div class="script-card" data-name="Spin 4 UGC">
-<h3>Spin 4 UGC</h3>
-<p>⭐KEYLESS</p>
+<h3>Spin 4 UGC</h3><p>⭐KEYLESS</p>
 <div class="btn-group">
 <button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet('https://raw.githubusercontent.com/svrnaexploits/loltreehouse/refs/heads/main/treehouse.lua'))()">Copy Script</button>
-<a href="https://www.roblox.com/games/16070671286/SPIN-4-UGC" target="_blank" class="btn btn-game">Game Link</a>
-</div>
-</div>
+<a class="btn btn-game" target="_blank" href="https://www.roblox.com/games/16070671286/SPIN-4-UGC">Game Link</a>
+</div></div>
 
 <div class="script-card" data-name="Afk For Ugc">
-<h3>Afk For Ugc</h3>
-<p>⭐KEYLESS</p>
+<h3>Afk For Ugc</h3><p>⭐KEYLESS</p>
 <div class="btn-group">
 <button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet('https://protected-roblox-scripts.onrender.com/66f1aa0e36ce654b7ced43bee74f1184'))()">Copy Script</button>
-<a href="https://www.roblox.com/games/111077326659419" target="_blank" class="btn btn-game">Game Link</a>
-</div>
-</div>
+<a class="btn btn-game" target="_blank" href="https://www.roblox.com/games/111077326659419">Game Link</a>
+</div></div>
 
 <div class="script-card" data-name="Strongman Simulator">
-<h3>Strongman Simulator</h3>
-<p>🚀INSTANT UGC</p>
+<h3>Strongman Simulator</h3><p>🚀INSTANT UGC</p>
 <div class="btn-group">
 <button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet('https://raw.githubusercontent.com/svrnaexploits/nyzscripts/refs/heads/main/instant'))()">Copy Script</button>
-<a href="https://www.roblox.com/games/6766156863/Strongman-Simulator" target="_blank" class="btn btn-game">Game Link</a>
-</div>
-</div>
+<a class="btn btn-game" target="_blank" href="https://www.roblox.com/games/6766156863/Strongman-Simulator">Game Link</a>
+</div></div>
 
 <div class="script-card" data-name="Paradise RP Script 1">
-<h3>Paradise RP</h3>
-<p>🚀INSTANT UGC</p>
+<h3>Paradise RP</h3><p>🚀INSTANT UGC</p>
 <div class="btn-group">
 <button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet('https://raw.githubusercontent.com/asuza999/pleasegiveacreditbeforeshowcasing/refs/heads/main/instantugcparadisorp.lua.txt'))()">Copy Script</button>
-<a href="https://www.roblox.com/it/games/13421266463/Paradise-RP" target="_blank" class="btn btn-game">Game Link</a>
-</div>
-</div>
+<a class="btn btn-game" target="_blank" href="https://www.roblox.com/games/13421266463/Paradise-RP">Game Link</a>
+</div></div>
 
 <div class="script-card" data-name="Paradise RP Script 2">
-<h3>Paradise RP</h3>
-<p>🚀INSTANT UGC</p>
+<h3>Paradise RP</h3><p>🚀INSTANT UGC</p>
 <div class="btn-group">
 <button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet('https://pastefy.app/PmlvkcgZ/raw'))()">Copy Script</button>
-<a href="https://www.roblox.com/games/13421266463/Paradise-RP" target="_blank" class="btn btn-game">Game Link</a>
-</div>
-</div>
+<a class="btn btn-game" target="_blank" href="https://www.roblox.com/games/13421266463/Paradise-RP">Game Link</a>
+</div></div>
 
 <div class="script-card" data-name="Taptors UGC Item Claims">
-<div style="display:flex;justify-content:space-between;align-items:center">
+<div style="display:flex;justify-content:space-between">
 <h3>Taptors UGC Item Claims</h3>
 <span class="dropdown-toggle" onclick="toggleDropdown(this)">▶</span>
 </div>
 <p>⭐KEYLESS</p>
 <div class="btn-group">
 <button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet('https://raw.githubusercontent.com/asuza999/nyzontop/refs/heads/main/proximityprompt.lua.txt'))()">Copy Script</button>
-<a href="https://www.roblox.com/games/121573674290343/Taptors-UGC-Item-Claims" target="_blank" class="btn btn-game">Game Link</a>
+<a class="btn btn-game" target="_blank" href="https://www.roblox.com/games/121573674290343/Taptors-UGC-Item-Claims">Game Link</a>
 </div>
 <div class="dropdown-content">
-<div class="dropdown-item"><span>Follow</span><button class="btn btn-copy btn-small" onclick="event.stopPropagation(); copyLink('https://www.roblox.com/users/4102344319/profile')">Copy Link</button></div>
-<div class="dropdown-item"><span>Join Group</span><button class="btn btn-copy btn-small" onclick="event.stopPropagation(); copyLink('https://www.roblox.com/communities/17260696/LOS-GIGA-PANAS#!/store')">Copy Link</button></div>
-<div class="dropdown-item"><span>Join Group</span><button class="btn btn-copy btn-small" onclick="event.stopPropagation(); copyLink('https://www.roblox.com/communities/34014348/Taptors-UGC#!/about')">Copy Link</button></div>
-</div>
-</div>
+<div class="dropdown-item"><span>Follow</span><button class="btn btn-copy btn-small" onclick="copyLink('https://www.roblox.com/users/4102344319/profile')">Copy</button></div>
+<div class="dropdown-item"><span>Group</span><button class="btn btn-copy btn-small" onclick="copyLink('https://www.roblox.com/communities/17260696/LOS-GIGA-PANAS#!/store')">Copy</button></div>
+<div class="dropdown-item"><span>Group</span><button class="btn btn-copy btn-small" onclick="copyLink('https://www.roblox.com/communities/34014348/Taptors-UGC#!/about')">Copy</button></div>
+</div></div>
 
 <div class="script-card" data-name="Free UGC Obby">
-<h3>Free UGC Obby</h3>
-<p>⭐KEYLESS</p>
+<h3>Free UGC Obby</h3><p>⭐KEYLESS</p>
 <div class="btn-group">
 <button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet('https://raw.githubusercontent.com/asuza999/bypassed/refs/heads/main/nyzontop404.lua.txt'))()">Copy Script</button>
-<a href="https://www.roblox.com/games/77027899546702/Free-UGC-Obby" target="_blank" class="btn btn-game">Game Link</a>
-</div>
-</div>
+<a class="btn btn-game" target="_blank" href="https://www.roblox.com/games/77027899546702/Free-UGC-Obby">Game Link</a>
+</div></div>
 
 <div class="script-card" data-name="Helios Cinema Tycoon">
-<h3>Helios Cinema Tycoon</h3>
-<p>⭐KEYLESS</p>
+<h3>Helios Cinema Tycoon</h3><p>⭐KEYLESS</p>
 <div class="btn-group">
 <button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()">Copy Script</button>
-<a href="https://www.roblox.com/games/140422012851942/Helios-Cinema-Tycoon" target="_blank" class="btn btn-game">Game Link</a>
-</div>
-</div>
+<a class="btn btn-game" target="_blank" href="https://www.roblox.com/games/140422012851942/Helios-Cinema-Tycoon">Game Link</a>
+</div></div>
 
 <div class="script-card" data-name="Cyberpunk Outfits UGCs">
-<h3>Cyberpunk Outfits UGCs</h3>
-<p>🚀INSTANT UGC</p>
+<h3>Cyberpunk Outfits UGCs</h3><p>🚀INSTANT UGC</p>
 <div class="btn-group">
 <button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet('https://raw.githubusercontent.com/svrnaexploits/ugc/refs/heads/main/instantugc'))()">Copy Script</button>
-<a href="https://www.roblox.com/games/71930642556524/Cyberpunk-Outfits-UGCs" target="_blank"="btn btn-game">Game Link</a>
-</div>
-</div>
+<a class="btn btn-game" target="_blank" href="https://www.roblox.com/games/71930642556524/Cyberpunk-Outfits-UGCs">Game Link</a>
+</div></div>
 
 <div class="script-card" data-name="BBC Wonder Chase Winter Sports">
-<h3>BBC Wonder Chase</h3>
-<p>⭐KEYLESS</p>
+<h3>BBC Wonder Chase</h3><p>⭐KEYLESS</p>
 <div class="btn-group">
 <button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet('https://raw.githubusercontent.com/asuza999/ugc2/refs/heads/main/wonderchaseupdatedscript.lua.txt'))()">Copy Script</button>
-<a href="https://www.roblox.com/games/16351911381/BBC-Wonder-Chase-Winter-Sports" target="_blank" class="btn btn-game">Game Link</a>
-</div>
-</div>
+<a class="btn btn-game" target="_blank" href="https://www.roblox.com/games/16351911381/BBC-Wonder-Chase-Winter-Sports">Game Link</a>
+</div></div>
 
-<div class="script-card" data-name="Escape Tsunami For UGC">
-<h3>Escape Tsunami For Ugc</h3>
-<p>⭐KEYLESS</p>
+<div class="script-card" data-name="Escape Tsunami For Ugc">
+<h3>Escape Tsunami For Ugc</h3><p>⭐KEYLESS</p>
 <div class="btn-group">
-<button class="btn btn-copy" onclickcopyScript(this)" data-script="loadstring(game:HttpGet('https://raw.githubusercontent.com/svrnaexploits/ugc/refs/heads/main/etfugc'))()">Copy Script</button>
-<a href="https://www.roblox.com/games/98999164981806/Escape-Tsunami-For-UGC" target="_blank" class="btn btn-game">Game Link</a>
-</div>
-</div>
+<button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet('https://raw.githubusercontent.com/svrnaexploits/ugc/refs/heads/main/etfugc'))()">Copy Script</button>
+<a class="btn btn-game" target="_blank" href="https://www.roblox.com/games/98999164981806/Escape-Tsunami-For-UGC">Game Link</a>
+</div></div>
 
 <div class="script-card" data-name="Escape Tsunami For Baddies">
-<h3>Escape Tsunami For Baddies</h3>
-<p>⭐KEYLESS</p>
+<h3>Escape Tsunami For Baddies</h3><p>⭐KEYLESS</p>
 <div class="btn-group">
 <button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet('https://raw.githubusercontent.com/svrnaexploits/ugc/refs/heads/main/esfb'))()">Copy Script</button>
-<a href="https://www.roblox.com/games/136070343234480/Escape-Tsunami-For-Baddies" target="_blank" class="btn btn-game">Game Link</a>
-</div>
-</div>
+<a class="btn btn-game" target="_blank" href="https://www.roblox.com/games/136070343234480/Escape-Tsunami-For-Baddies">Game Link</a>
+</div></div>
 
 <div class="script-card" data-name="Collect For Ugc">
-<h3>Collect For Ugc</h3>
-<p>⭐KEYLESS</p>
+<h3>Collect For Ugc</h3><p>⭐KEYLESS</p>
 <div class="btn-group">
 <button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet('https://raw.githubusercontent.com/asuza999/nyz/refs/heads/main/autocollectbypassedanticheatjantwentyfourtwentytwentysix.lua.txt'))()">Copy Script</button>
-<a href="https://www.roblox.com/games/17103905229" target="_blank" class="btn btn-game">Game Link</a>
-</div>
-</div>
+<a class="btn btn-game" target="_blank" href="https://www.roblox.com/games/17103905229">Game Link</a>
+</div></div>
 
 </div>
 </div>
+
 <script>
 let captchaValue=""
-function generateCaptcha(){let c=document.getElementById("captcha-canvas"),x=c.getContext("2d");x.clearRect(0,0,c.width,c.height);let ch="ABCDEFGHJKLMNOPQRSTUVWXYZ0123456789";captchaValue="";for(let i=0;i<7;i++){x.beginPath();x.moveTo(Math.random()*c.width,Math.random()*c.height);x.lineTo(Math.random()*c.width,Math.random()*c.height);x.strokeStyle="rgba(255,255,255,0.2)";x.lineWidth=2;x.stroke()}for(let i=0;i<5;i++){let r=ch[Math.floor(Math.random()*ch.length)];captchaValue+=r;x.font="bold 30px Arial";x.fillStyle="#fff";let px=30+i*30,py=40+(Math.random()*10-5),a=Math.random()*0.4-0.2;x.save();x.translate(px,py);x.rotate(a);x.fillText(r,0,0);x.restore()}}
-function checkCaptcha(){let i=document.getElementById("captcha-input").value.toUpperCase();if(i===captchaValue){document.getElementById("captcha-overlay").style.display="none";document.getElementById("main-content").classList.add("unlocked")}else{alert("Incorrect Code. Try again.");document.getElementById("captcha-input").value="";generateCaptcha()}}
+function generateCaptcha(){const c=document.getElementById("captcha-canvas"),x=c.getContext("2d");x.clearRect(0,0,c.width,c.height);const ch="ABCDEFGHJKLMNOPQRSTUVWXYZ0123456789";captchaValue="";for(let i=0;i<5;i++){const r=ch[Math.floor(Math.random()*ch.length)];captchaValue+=r;x.font="bold 30px Arial";x.fillStyle="#fff";x.fillText(r,30+i*30,40)}}
+function checkCaptcha(){if(document.getElementById("captcha-input").value.toUpperCase()===captchaValue){document.getElementById("captcha-overlay").style.display="none";document.getElementById("main-content").classList.add("unlocked")}else generateCaptcha()}
 generateCaptcha()
 const canvas=document.getElementById("particle-canvas"),ctx=canvas.getContext("2d")
-let particles=[]
-function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight}
-window.addEventListener("resize",resize);resize()
-class Particle{constructor(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.size=Math.random()*2+.5;this.speedX=Math.random()*1-.5;this.speedY=Math.random()*1-.5}update(){this.x+=this.speedX;this.y+=this.speedY;if(this.x>canvas.width)this.x=0;else if(this.x<0)this.x=canvas.width;if(this.y>canvas.height)this.y=0;else if(this.y<0)this.y=canvas.height}draw(){ctx.fillStyle="rgba(255,255,255,0.4)";ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.fill()}}
-function init(){for(let i=0;i<80;i++)particles.push(new Particle())}
-function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach(p=>{p.update();p.draw()});requestAnimationFrame(animate)}
-init();animate()
-function filterScripts(){let i=document.getElementById("searchInput").value.toLowerCase(),c=document.getElementsByClassName("script-card");for(let k of c){let n=k.getAttribute("data-name").toLowerCase();k.style.display=n.includes(i)?"block":"none"}}
-function copyScript(b){navigator.clipboard.writeText(b.getAttribute("data-script"));alert("Script copied to clipboard!")}
-function copyLink(u){navigator.clipboard.writeText(u);alert("Link copied to clipboard!")}
-function toggleDropdown(e){const c=e.closest(".script-card").querySelector(".dropdown-content");const o=c.style.display==="block";c.style.display=o?"none":"block";e.classList.toggle("open",!o)}
+canvas.width=innerWidth;canvas.height=innerHeight
+let p=[]
+for(let i=0;i<80;i++)p.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,vx:Math.random()-0.5,vy:Math.random()-0.5})
+function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);p.forEach(o=>{o.x+=o.vx;o.y+=o.vy;if(o.x<0)o.x=canvas.width;if(o.x>canvas.width)o.x=0;if(o.y<0)o.y=canvas.height;if(o.y>canvas.height)o.y=0;ctx.fillStyle="rgba(255,255,255,.4)";ctx.beginPath();ctx.arc(o.x,o.y,1.5,0,Math.PI*2);ctx.fill()});requestAnimationFrame(animate)}
+animate()
+function filterScripts(){const v=searchInput.value.toLowerCase();document.querySelectorAll(".script-card").forEach(c=>c.style.display=c.dataset.name.toLowerCase().includes(v)?"block":"none")}
+function copyScript(b){navigator.clipboard.writeText(b.dataset.script)}
+function copyLink(u){navigator.clipboard.writeText(u)}
+function toggleDropdown(e){const d=e.parentElement.parentElement.querySelector(".dropdown-content");d.style.display=d.style.display==="block"?"none":"block"}
 </script>
 </body>
 </html>
