@@ -76,6 +76,51 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:black;color:white
 </div>
 </div>
 
+<div class="script-card" data-name="Afk For Ugc">
+<h3>Afk For Ugc</h3>
+<p>⭐KEYLESS</p>
+<div class="btn-group">
+<button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet('https://protected-roblox-scripts.onrender.com/66f1aa0e36ce654b7ced43bee74f1184'))()">Copy Script</button>
+<a class="btn btn-game" target="_blank" href="https://www.roblox.com/games/111077326659419">Game Link</a>
+</div>
+</div>
+
+<div class="script-card" data-name="Strongman Simulator">
+<h3>Strongman Simulator</h3>
+<p>🚀INSTANT UGC</p>
+<div class="btn-group">
+<button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet('https://raw.githubusercontent.com/svrnaexploits/nyzscripts/refs/heads/main/instant'))()">Copy Script</button>
+<a class="btn btn-game" target="_blank" href="https://www.roblox.com/games/6766156863/Strongman-Simulator">Game Link</a>
+</div>
+</div>
+
+<div class="script-card" data-name="Paradise RP">
+<h3>Paradise RP</h3>
+<p>🚀INSTANT UGC</p>
+<div class="btn-group">
+<button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet('https://raw.githubusercontent.com/asuza999/pleasegiveacreditbeforeshowcasing/refs/heads/main/instantugcparadisorp.lua.txt'))()">Copy Script</button>
+<a class="btn btn-game" target="_blank" href="https://www.roblox.com/games/13421266463/Paradise-RP">Game Link</a>
+</div>
+</div>
+
+<div class="script-card" data-name="Free UGC Obby">
+<h3>Free UGC Obby</h3>
+<p>⭐KEYLESS</p>
+<div class="btn-group">
+<button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet('https://raw.githubusercontent.com/asuza999/bypassed/refs/heads/main/nyzontop404.lua.txt'))()">Copy Script</button>
+<a class="btn btn-game" target="_blank" href="https://www.roblox.com/games/77027899546702/Free-UGC-Obby">Game Link</a>
+</div>
+</div>
+
+<div class="script-card" data-name="Cyberpunk Outfits UGCs">
+<h3>Cyberpunk Outfits UGCs</h3>
+<p>🚀INSTANT UGC</p>
+<div class="btn-group">
+<button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet('https://raw.githubusercontent.com/svrnaexploits/ugc/refs/heads/main/instantugc'))()">Copy Script</button>
+<a class="btn btn-game" target="_blank" href="https://www.roblox.com/games/71930642556524/Cyberpunk-Outfits-UGCs">Game Link</a>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -84,14 +129,12 @@ let captchaValue=""
 function generateCaptcha(){let c=document.getElementById("captcha-canvas"),x=c.getContext("2d");x.clearRect(0,0,c.width,c.height);let ch="ABCDEFGHJKLMNPQRSTUVWXYZ0123456789";captchaValue="";for(let i=0;i<5;i++){let r=ch[Math.floor(Math.random()*ch.length)];captchaValue+=r;x.font="30px Arial";x.fillStyle="#fff";x.fillText(r,30+i*30,40)}}
 function checkCaptcha(){let v=document.getElementById("captcha-input").value.toUpperCase();if(v===captchaValue){document.getElementById("captcha-overlay").style.display="none";document.getElementById("main-content").classList.add("unlocked")}else{generateCaptcha();document.getElementById("captcha-input").value=""}}
 generateCaptcha()
-
 const canvas=document.getElementById("particle-canvas"),ctx=canvas.getContext("2d")
 canvas.width=innerWidth;canvas.height=innerHeight
 let particles=[]
 for(let i=0;i<80;i++)particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,s:Math.random()*2+1,dx:Math.random()-.5,dy:Math.random()-.5})
 function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach(p=>{p.x+=p.dx;p.y+=p.dy;if(p.x<0)p.x=canvas.width;if(p.y<0)p.y=canvas.height;if(p.x>canvas.width)p.x=0;if(p.y>canvas.height)p.y=0;ctx.fillStyle="rgba(255,255,255,.4)";ctx.beginPath();ctx.arc(p.x,p.y,p.s,0,Math.PI*2);ctx.fill()});requestAnimationFrame(animate)}
 animate()
-
 function filterScripts(){let v=searchInput.value.toLowerCase();document.querySelectorAll(".script-card").forEach(c=>{c.style.display=c.dataset.name.toLowerCase().includes(v)?"block":"none"})}
 function copyScript(b){navigator.clipboard.writeText(b.dataset.script);alert("Script copied")}
 </script>
