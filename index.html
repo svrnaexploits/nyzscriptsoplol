@@ -16,7 +16,9 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:black;color:white
 .script-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;align-items:start}
 .script-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);padding:20px;border-radius:15px;backdrop-filter:blur(10px);transition:transform .2s,border-color .2s}
 .script-card:hover{transform:translateY(-5px);border-color:rgba(255,255,255,.5)}
-.script-card h3{margin:0 0 5px 0;font-size:20px;color:#fff}
+.script-card h3{margin:0;font-size:20px;color:#fff}
+.card-header{display:flex;align-items:center;gap:10px;margin-bottom:5px}
+.new-star{color:#ffcc00;font-size:18px;text-shadow:0 0 10px rgba(255,204,0,0.5)}
 .script-card p{margin:0 0 15px 0;font-size:14px;color:#bbb;height:40px;overflow:hidden}
 .btn-group{display:flex;gap:10px}
 .btn{flex:1;padding:10px;border:none;border-radius:5px;cursor:pointer;font-weight:bold;transition:.3s;text-align:center;text-decoration:none;font-size:13px}
@@ -55,6 +57,22 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:black;color:white
 <input type="text" id="searchInput" class="search-bar" placeholder="Search scripts..." onkeyup="filterScripts()">
 </div>
 <div class="script-grid" id="scriptContainer">
+<div class="script-card" data-name="AFK Or Play For UGC Items">
+<div class="card-header"><span class="new-star">★</span><h3>AFK Or Play For UGC Items</h3></div>
+<p>⭐KEYLESS</p>
+<div class="btn-group">
+<button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet(&quot;https://raw.githubusercontent.com/asuza999/officialnyzscripts-/refs/heads/main/afkforugc.lua.txt&quot;))()">Copy Script</button>
+<a href="https://www.roblox.com/pt/games/121237444507033/AFK-Or-Play-For-UGC-Items" target="_blank" class="btn btn-game">Game Link</a>
+</div>
+</div>
+<div class="script-card" data-name="Build A Star Garden">
+<div class="card-header"><span class="new-star">★</span><h3>Build A Star Garden</h3></div>
+<p>⭐KEYLESS</p>
+<div class="btn-group">
+<button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet(&quot;https://raw.githubusercontent.com/asuza999/justasimplescript/refs/heads/main/autocollectstars.lua.txt&quot;))()">Copy Script</button>
+<a href="https://www.roblox.com/games/17216786206" target="_blank" class="btn btn-game">Game Link</a>
+</div>
+</div>
 <div class="script-card" data-name="Get a UGC EMOTE">
 <h3>Get a UGC EMOTE</h3>
 <p>⭐KEYLESS</p>
