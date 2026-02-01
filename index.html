@@ -18,32 +18,25 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 .search-bar:focus{border-color:rgba(255,255,255,0.4);background:rgba(255,255,255,0.07);box-shadow:0 0 20px rgba(255,255,255,0.05)}
 .script-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:25px;align-items:start}
 .script-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);padding:24px;border-radius:20px;backdrop-filter:blur(10px);transition:all .3s cubic-bezier(0.4,0,0.2,1);position:relative;overflow:hidden}
-.script-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(45deg,transparent,rgba(255,255,255,0.03),transparent);transform:translateX(-100%);transition:0.5s}
-.script-card:hover::before{transform:translateX(100%)}
 .script-card:hover{transform:translateY(-8px);border-color:rgba(255,255,255,0.2);background:rgba(255,255,255,0.06);box-shadow:0 15px 40px rgba(0,0,0,0.4)}
 .script-card h3{margin:0 0 8px 0;font-size:20px;color:#fff;font-weight:700}
-.script-card p{margin:0 0 20px 0;font-size:13px;color:#999;line-height:1.5;height:40px;overflow:hidden}
+.script-card p{margin:0 0 20px 0;font-size:14px;color:#bbb;font-weight:600}
 .btn-group{display:flex;gap:12px}
 .btn{flex:1;padding:12px;border:none;border-radius:10px;cursor:pointer;font-weight:700;transition:all .2s;text-align:center;text-decoration:none;font-size:13px}
 .btn-copy{background:#fff;color:#000}
 .btn-game{background:rgba(255,255,255,0.08);color:#fff;border:1px solid rgba(255,255,255,0.2)}
 .btn:hover{filter:brightness(0.9);transform:scale(1.02)}
-.btn:active{transform:scale(0.98)}
 .dropdown-toggle{cursor:pointer;font-size:14px;color:#666;transition:0.3s}
 .dropdown-toggle.open{transform:rotate(90deg);color:#fff}
 .dropdown-content{display:none;margin-top:20px;border-top:1px solid rgba(255,255,255,0.1);padding-top:15px}
 .dropdown-item{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:13px;color:#aaa}
 .btn-small{padding:6px 14px;font-size:11px;flex:none;border-radius:6px}
 #captcha-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:#000;z-index:9999;display:flex;justify-content:center;align-items:center}
-.captcha-box{background:#0a0a0a;padding:40px;border-radius:24px;border:1px solid #222;text-align:center;width:320px;box-shadow:0 20px 60px rgba(0,0,0,0.8)}
-.captcha-header{font-size:22px;font-weight:800;margin-bottom:20px;color:#fff;letter-spacing:1px}
+.captcha-box{background:#0a0a0a;padding:40px;border-radius:24px;border:1px solid #222;text-align:center;width:320px}
+.captcha-header{font-size:22px;font-weight:800;margin-bottom:20px;color:#fff}
 #captcha-canvas{background:#111;margin-bottom:20px;border-radius:12px;cursor:pointer;border:1px solid #333}
-.captcha-input{width:100%;padding:15px;margin-bottom:20px;background:#151515;border:1px solid #333;color:white;border-radius:12px;box-sizing:border-box;text-align:center;font-size:18px;outline:none;transition:0.3s}
-.captcha-input:focus{border-color:#555;background:#1a1a1a}
-.captcha-btn{width:100%;padding:15px;background:#fff;color:#000;border:none;border-radius:12px;font-weight:800;cursor:pointer;transition:.3s;font-size:16px}
-.captcha-btn:hover{opacity:0.9;transform:translateY(-2px)}
-.captcha-info{font-size:12px;color:#555;margin-top:15px}
-@media (max-width:600px){.header-flex{flex-direction:column;text-align:center}.script-grid{grid-template-columns:1fr}}
+.captcha-input{width:100%;padding:15px;margin-bottom:20px;background:#151515;border:1px solid #333;color:white;border-radius:12px;text-align:center;font-size:18px;outline:none}
+.captcha-btn{width:100%;padding:15px;background:#fff;color:#000;border:none;border-radius:12px;font-weight:800;cursor:pointer;font-size:16px}
 </style>
 </head>
 <body>
@@ -53,7 +46,6 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 <canvas id="captcha-canvas" width="200" height="70" onclick="generateCaptcha()"></canvas>
 <input type="text" id="captcha-input" class="captcha-input" placeholder="Type code..." autocomplete="off">
 <button class="captcha-btn" onclick="checkCaptcha()">Enter Website</button>
-<div class="captcha-info">Click the code to refresh</div>
 </div>
 </div>
 <canvas id="particle-canvas"></canvas>
@@ -67,10 +59,26 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 </div>
 </div>
 <div class="search-section">
-<input type="text" id="searchInput" class="search-bar" placeholder="Search For Scripts Here" onkeyup="filterScripts()">
+<input type="text" id="searchInput" class="search-bar" placeholder="Search for games..." onkeyup="filterScripts()">
 </div>
 <div class="script-grid" id="scriptContainer">
-<div class="script-card" data-name="Finding Grubby In Korean Spa">
+<div class="script-card" data-name="MR BEAST LAND Riyadh Season">
+<h3>Riyadh Season </h3>
+<p>🚀INSTANT UGC</p>
+<div class="btn-group">
+<button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet(&quot;https://raw.githubusercontent.com/asuza999/instantugc/refs/heads/main/universalfiretouchinterests.lua.txt&quot;))()">Copy Script</button>
+<a href="https://www.roblox.com/games/104730645994648/MR-BEAST-LAND-Riyadh-Season" target="_blank" class="btn btn-game">Game Link</a>
+</div>
+</div>
+<div class="script-card" data-name="Livetopia RP">
+<h3>Livetopia RP</h3>
+<p>🚀INSTANT UGC</p>
+<div class="btn-group">
+<button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet(&quot;https://protected-roblox-scripts.onrender.com/88ffbc8b969f6b22f6f5fb9cd2ae5372&quot;))()">Copy Script</button>
+<a href="https://www.roblox.com/games/6737970321/Livetopia-RP" target="_blank" class="btn btn-game">Game Link</a>
+</div>
+</div>
+<div class="script-card" data-name="Grubby">
 <h3>Finding Grubby In The Korean Spa</h3>
 <p>⭐KEYLESS</p>
 <div class="btn-group">
@@ -250,21 +258,21 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 </div>
 <script>
 let captchaValue=""
-function generateCaptcha(){let c=document.getElementById("captcha-canvas"),x=c.getContext("2d");x.clearRect(0,0,c.width,c.height);let ch="ABCDEFGHJKLMNOPQRSTUVWXYZ0123456789";captchaValue="";for(let i=0;i<7;i++){x.beginPath();x.moveTo(Math.random()*c.width,Math.random()*c.height);x.lineTo(Math.random()*c.width,Math.random()*c.height);x.strokeStyle="rgba(255,255,255,0.1)";x.lineWidth=2;x.stroke()}for(let i=0;i<6;i++){let r=ch[Math.floor(Math.random()*ch.length)];captchaValue+=r;x.font="bold 34px Arial";x.fillStyle="#fff";let px=25+i*28,py=45+(Math.random()*10-5),a=Math.random()*0.4-0.2;x.save();x.translate(px,py);x.rotate(a);x.fillText(r,0,0);x.restore()}}
-function checkCaptcha(){let i=document.getElementById("captcha-input").value.toUpperCase();if(i===captchaValue){document.getElementById("captcha-overlay").style.opacity="0";setTimeout(()=>{document.getElementById("captcha-overlay").style.display="none";document.getElementById("main-content").classList.add("unlocked");updateCount()},500)}else{alert("Incorrect Code.");document.getElementById("captcha-input").value="";generateCaptcha()}}
+function generateCaptcha(){let c=document.getElementById("captcha-canvas"),x=c.getContext("2d");x.clearRect(0,0,c.width,c.height);let ch="ABCDEFGHJKLMNOPQRSTUVWXYZ0123456789";captchaValue="";for(let i=0;i<6;i++){let r=ch[Math.floor(Math.random()*ch.length)];captchaValue+=r;x.font="bold 34px Arial";x.fillStyle="#fff";let px=25+i*28,py=45+(Math.random()*10-5),a=Math.random()*0.4-0.2;x.save();x.translate(px,py);x.rotate(a);x.fillText(r,0,0);x.restore()}}
+function checkCaptcha(){let i=document.getElementById("captcha-input").value.toUpperCase();if(i===captchaValue){document.getElementById("captcha-overlay").style.display="none";document.getElementById("main-content").classList.add("unlocked");updateCount()}else{alert("Incorrect Code.");generateCaptcha()}}
 generateCaptcha()
 const canvas=document.getElementById("particle-canvas"),ctx=canvas.getContext("2d")
 let particles=[]
 function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight}
 window.addEventListener("resize",resize);resize()
-class Particle{constructor(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.size=Math.random()*1.5+.2;this.speedX=Math.random()*0.6-0.3;this.speedY=Math.random()*0.6-0.3}update(){this.x+=this.speedX;this.y+=this.speedY;if(this.x>canvas.width)this.x=0;else if(this.x<0)this.x=canvas.width;if(this.y>canvas.height)this.y=0;else if(this.y<0)this.y=canvas.height}draw(){ctx.fillStyle="rgba(255,255,255,0.2)";ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.fill()}}
+class Particle{constructor(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.size=Math.random()*1.5;this.speedX=Math.random()*0.6-0.3;this.speedY=Math.random()*0.6-0.3}update(){this.x+=this.speedX;this.y+=this.speedY;if(this.x>canvas.width)this.x=0;if(this.x<0)this.x=canvas.width;if(this.y>canvas.height)this.y=0;if(this.y<0)this.y=canvas.height}draw(){ctx.fillStyle="rgba(255,255,255,0.2)";ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.fill()}}
 function init(){for(let i=0;i<120;i++)particles.push(new Particle())}
 function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach(p=>{p.update();p.draw()});requestAnimationFrame(animate)}
 init();animate()
 function updateCount(){document.getElementById("scriptCount").innerText=document.querySelectorAll(".script-card").length}
 function filterScripts(){let i=document.getElementById("searchInput").value.toLowerCase(),c=document.getElementsByClassName("script-card");for(let k of c){let n=k.getAttribute("data-name").toLowerCase();k.style.display=n.includes(i)?"block":"none"}}
-function copyScript(b){navigator.clipboard.writeText(b.getAttribute("data-script"));alert("Success! Script copied to clipboard.")}
-function copyLink(u){navigator.clipboard.writeText(u);alert("Link copied!")}
+function copyScript(b){navigator.clipboard.writeText(b.getAttribute("data-script"));alert("Copied to clipboard.")}
+function copyLink(u){navigator.clipboard.writeText(u);alert("Link copied.")}
 function toggleDropdown(e){const c=e.closest(".script-card").querySelector(".dropdown-content");const o=c.style.display==="block";c.style.display=o?"none":"block";e.classList.toggle("open",!o)}
 </script>
 </body>
