@@ -7,8 +7,7 @@
 <style>
 body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:white;font-family:'Inter','Segoe UI',sans-serif;overflow-x:hidden}
 #particle-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1}
-.ui-layer{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:40px 20px;filter:blur(15px);pointer-events:none;transition:filter .6s cubic-bezier(0.4,0,0.2,1),opacity .6s;opacity:0}
-.ui-layer.unlocked{filter:none;pointer-events:auto;opacity:1}
+.ui-layer{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:40px 20px;opacity:1;pointer-events:auto}
 .header-flex{display:flex;justify-content:space-between;align-items:center;margin-bottom:40px;flex-wrap:wrap;gap:20px}
 .logo{font-size:28px;font-weight:900;letter-spacing:4px;color:#fff;text-shadow:0 0 15px rgba(255,255,255,0.4)}
 .stats-badge{background:rgba(255,255,255,0.1);padding:8px 16px;border-radius:20px;border:1px solid rgba(255,255,255,0.2);font-size:14px;backdrop-filter:blur(5px);display:flex;align-items:center;gap:8px}
@@ -18,6 +17,8 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 .search-bar:focus{border-color:rgba(255,255,255,0.4);background:rgba(255,255,255,0.07);box-shadow:0 0 20px rgba(255,255,255,0.05)}
 .script-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:25px;align-items:start}
 .script-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);padding:24px;border-radius:20px;backdrop-filter:blur(10px);transition:all .3s cubic-bezier(0.4,0,0.2,1);position:relative;overflow:hidden}
+.script-card::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent);transition:0.5s}
+.script-card:hover::after{left:100%}
 .script-card:hover{transform:translateY(-8px);border-color:rgba(255,255,255,0.2);background:rgba(255,255,255,0.06);box-shadow:0 15px 40px rgba(0,0,0,0.4)}
 .script-card h3{margin:0 0 8px 0;font-size:20px;color:#fff;font-weight:700}
 .script-card p{margin:0 0 20px 0;font-size:14px;color:#bbb;font-weight:600}
@@ -31,23 +32,9 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 .dropdown-content{display:none;margin-top:20px;border-top:1px solid rgba(255,255,255,0.1);padding-top:15px}
 .dropdown-item{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:13px;color:#aaa}
 .btn-small{padding:6px 14px;font-size:11px;flex:none;border-radius:6px}
-#captcha-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:#000;z-index:9999;display:flex;justify-content:center;align-items:center}
-.captcha-box{background:#0a0a0a;padding:40px;border-radius:24px;border:1px solid #222;text-align:center;width:320px}
-.captcha-header{font-size:22px;font-weight:800;margin-bottom:20px;color:#fff}
-#captcha-canvas{background:#111;margin-bottom:20px;border-radius:12px;cursor:pointer;border:1px solid #333}
-.captcha-input{width:100%;padding:15px;margin-bottom:20px;background:#151515;border:1px solid #333;color:white;border-radius:12px;text-align:center;font-size:18px;outline:none}
-.captcha-btn{width:100%;padding:15px;background:#fff;color:#000;border:none;border-radius:12px;font-weight:800;cursor:pointer;font-size:16px}
 </style>
 </head>
 <body>
-<div id="captcha-overlay">
-<div class="captcha-box">
-<div class="captcha-header">Verification</div>
-<canvas id="captcha-canvas" width="200" height="70" onclick="generateCaptcha()"></canvas>
-<input type="text" id="captcha-input" class="captcha-input" placeholder="Type code..." autocomplete="off">
-<button class="captcha-btn" onclick="checkCaptcha()">Enter Website</button>
-</div>
-</div>
 <canvas id="particle-canvas"></canvas>
 <div class="ui-layer" id="main-content">
 <div class="header-flex">
@@ -63,7 +50,7 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 </div>
 <div class="script-grid" id="scriptContainer">
 <div class="script-card" data-name="MR BEAST LAND Riyadh Season">
-<h3>Riyadh Season </h3>
+<h3>Riyadh Season</h3>
 <p>🚀INSTANT UGC</p>
 <div class="btn-group">
 <button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet(&quot;https://raw.githubusercontent.com/asuza999/instantugc/refs/heads/main/universalfiretouchinterests.lua.txt&quot;))()">Copy Script</button>
@@ -257,23 +244,19 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 </div>
 </div>
 <script>
-let captchaValue=""
-function generateCaptcha(){let c=document.getElementById("captcha-canvas"),x=c.getContext("2d");x.clearRect(0,0,c.width,c.height);let ch="ABCDEFGHJKLMNOPQRSTUVWXYZ0123456789";captchaValue="";for(let i=0;i<6;i++){let r=ch[Math.floor(Math.random()*ch.length)];captchaValue+=r;x.font="bold 34px Arial";x.fillStyle="#fff";let px=25+i*28,py=45+(Math.random()*10-5),a=Math.random()*0.4-0.2;x.save();x.translate(px,py);x.rotate(a);x.fillText(r,0,0);x.restore()}}
-function checkCaptcha(){let i=document.getElementById("captcha-input").value.toUpperCase();if(i===captchaValue){document.getElementById("captcha-overlay").style.display="none";document.getElementById("main-content").classList.add("unlocked");updateCount()}else{alert("Incorrect Code.");generateCaptcha()}}
-generateCaptcha()
 const canvas=document.getElementById("particle-canvas"),ctx=canvas.getContext("2d")
 let particles=[]
 function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight}
 window.addEventListener("resize",resize);resize()
 class Particle{constructor(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.size=Math.random()*1.5;this.speedX=Math.random()*0.6-0.3;this.speedY=Math.random()*0.6-0.3}update(){this.x+=this.speedX;this.y+=this.speedY;if(this.x>canvas.width)this.x=0;if(this.x<0)this.x=canvas.width;if(this.y>canvas.height)this.y=0;if(this.y<0)this.y=canvas.height}draw(){ctx.fillStyle="rgba(255,255,255,0.2)";ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.fill()}}
-function init(){for(let i=0;i<120;i++)particles.push(new Particle())}
+function init(){for(let i=0;i<120;i++)particles.push(new Particle());updateCount()}
 function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach(p=>{p.update();p.draw()});requestAnimationFrame(animate)}
-init();animate()
 function updateCount(){document.getElementById("scriptCount").innerText=document.querySelectorAll(".script-card").length}
 function filterScripts(){let i=document.getElementById("searchInput").value.toLowerCase(),c=document.getElementsByClassName("script-card");for(let k of c){let n=k.getAttribute("data-name").toLowerCase();k.style.display=n.includes(i)?"block":"none"}}
 function copyScript(b){navigator.clipboard.writeText(b.getAttribute("data-script"));alert("Copied to clipboard.")}
 function copyLink(u){navigator.clipboard.writeText(u);alert("Link copied.")}
 function toggleDropdown(e){const c=e.closest(".script-card").querySelector(".dropdown-content");const o=c.style.display==="block";c.style.display=o?"none":"block";e.classList.toggle("open",!o)}
+init();animate()
 </script>
 </body>
 </html>
