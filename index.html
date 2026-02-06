@@ -32,39 +32,15 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 .dropdown-content{display:none;margin-top:20px;border-top:1px solid rgba(255,255,255,0.1);padding-top:15px}
 .dropdown-item{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:13px;color:#aaa}
 .btn-small{padding:6px 14px;font-size:11px;flex:none;border-radius:6px}
-
-/* Toast Notification Styles */
-#toast-container {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    z-index: 9999;
-}
-.toast {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: white;
-    padding: 16px 24px;
-    border-radius: 12px;
-    margin-top: 10px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    transform: translateX(120%);
-    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-.toast.show { transform: translateX(0); }
-.toast-icon { color: #00ff88; font-weight: bold; }
+#toast-container{position:fixed;bottom:30px;right:30px;z-index:9999}
+.toast{background:rgba(255,255,255,0.1);backdrop-filter:blur(15px);border:1px solid rgba(255,255,255,0.2);color:white;padding:16px 24px;border-radius:12px;margin-top:10px;box-shadow:0 10px 30px rgba(0,0,0,0.5);display:flex;align-items:center;gap:12px;transform:translateX(120%);transition:transform 0.4s cubic-bezier(0.68,-0.55,0.265,1.55)}
+.toast.show{transform:translateX(0)}
+.toast-icon{color:#00ff88;font-weight:bold}
 </style>
 </head>
 <body>
 <canvas id="particle-canvas"></canvas>
-
-<!-- Toast Container -->
 <div id="toast-container"></div>
-
 <div class="ui-layer" id="main-content">
 <div class="header-flex">
 <div class="logo">NYZ SCRIPTS</div>
@@ -78,8 +54,6 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 <input type="text" id="searchInput" class="search-bar" placeholder="Search Scripts" onkeyup="filterScripts()">
 </div>
 <div class="script-grid" id="scriptContainer">
-
-<!-- SOUR PATCH KIDS Card -->
 <div class="script-card" data-name="SOUR PATCH KIDS Mischief Tycoon">
 <h3>Sour Patch Tycoon</h3>
 <p>⭐KEYLESS</p>
@@ -88,7 +62,6 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 <a href="https://www.roblox.com/games/16984716324/SOUR-PATCH-KIDS-Mischief-Tycoon" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
-
 <div class="script-card" data-name="AP FOODZIKI">
 <h3>Grab The Foodzik</h3>
 <p>⭐KEYLESS</p>
@@ -97,7 +70,6 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 <a href="https://www.roblox.com/games/78403106549851/AP-FOODZIKI" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
-
 <div class="script-card" data-name="Pacsun Los Angeles Tycoon">
 <h3>Pacsun Tycoon</h3>
 <p>⭐KEYLESS</p>
@@ -106,7 +78,6 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 <a href="https://www.roblox.com/games/11258371342/Pacsun-Los-Angeles-Tycoon" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
-
 <div class="script-card" data-name="Collect Brainrots for UGC">
 <h3>Collect Brainrots for UGC</h3>
 <p>⭐KEYLESS</p>
@@ -115,7 +86,6 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 <a href="https://www.roblox.com/games/78937301123654/SOON-Collect-Brainrots-for-UGC" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
-
 <div class="script-card" data-name="Donation Clicker">
 <h3>Donation Clicker</h3>
 <p>⭐KEYLESS</p>
@@ -124,7 +94,6 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 <a href="https://www.roblox.com/id/games/114397553889292/Donation-Clicker" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
-
 <div class="script-card" data-name="Hex Mall Play Win Wear">
 <h3>Hex Mall</h3>
 <p>⭐KEYLESS</p>
@@ -133,7 +102,6 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 <a href="https://www.roblox.com/games/18394280972/Hex-Mall-Play-Win-Wear" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
-
 <div class="script-card" data-name="Punch Simulator">
 <h3>Punch Simulator</h3>
 <p>⭐KEYLESS</p>
@@ -142,7 +110,6 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 <a href="https://www.roblox.com/games/14236123211/Punch-Simulator" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
-
 <div class="script-card" data-name="UGC Obby">
 <h3>UGC Obby</h3>
 <p>⭐KEYLESS</p>
@@ -151,7 +118,6 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 <a href="https://www.roblox.com/games/88646166375915/UGC-Obby" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
-
 <div class="script-card" data-name="Speed Champions">
 <h3>Speed Champions</h3>
 <p>⭐KEYLESS</p>
@@ -160,7 +126,6 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 <a href="https://www.roblox.com/games/4539184430/Speed-Champions" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
-
 <div class="script-card" data-name="Расти-Круши Unnamed">
 <h3>Расти-Круши</h3>
 <p>⭐KEYLESS</p>
@@ -169,7 +134,6 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 <a href="https://www.roblox.com/games/138161387114938/unnamed" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
-
 <div class="script-card" data-name="Obby for UGC">
 <h3>Obby for UGC</h3>
 <p>⭐KEYLESS</p>
@@ -178,7 +142,6 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 <a href="https://www.roblox.com/games/104986251086858/Obby-for-UGC" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
-
 <div class="script-card" data-name="РОБЛОГРАД: МИР ПРАЗДНИК">
 <h3>РОБЛОГРАД</h3>
 <p>⭐KEYLESS</p>
@@ -187,7 +150,6 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 <a href="https://www.roblox.com/games/109351177126111/unnamed" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
-
 <div class="script-card" data-name="BBC Wonder Chase Winter Sports New">
 <h3>BBC Wonder Chase</h3>
 <p>⭐KEYLESS</p>
@@ -196,7 +158,6 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 <a href="https://www.roblox.com/games/16351911381/BBC-Wonder-Chase-Winter-Sports" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
-
 <div class="script-card" data-name="MR BEAST LAND Riyadh Season">
 <h3>Riyadh Season</h3>
 <p>🚀INSTANT UGC</p>
@@ -205,7 +166,6 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 <a href="https://www.roblox.com/games/104730645994648/MR-BEAST-LAND-Riyadh-Season" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
-
 <div class="script-card" data-name="Livetopia RP">
 <h3>Livetopia RP</h3>
 <p>🚀INSTANT UGC</p>
@@ -214,7 +174,6 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 <a href="https://www.roblox.com/games/6737970321/Livetopia-RP" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
-
 <div class="script-card" data-name="Grubby">
 <h3>Finding Grubby</h3>
 <p>⭐KEYLESS</p>
@@ -223,7 +182,6 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 <a href="https://www.roblox.com/games/90029482000377/Grubby" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
-
 <div class="script-card" data-name="Pass The Brainrot">
 <h3>Pass The Brainrot</h3>
 <p>⭐KEYLESS</p>
@@ -232,7 +190,6 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 <a href="https://www.roblox.com/games/132065622827243/Pass-The-Brainrot" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
-
 <div class="script-card" data-name="Obby For Free Rewards">
 <h3>Obby For Rewards</h3>
 <p>⭐KEYLESS</p>
@@ -241,7 +198,6 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 <a href="https://www.roblox.com/games/103719498213854/Obby-For-Free-Rewards" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
-
 <div class="script-card" data-name="AFK Or Play For UGC Items">
 <h3>AFK For UGC</h3>
 <p>⭐KEYLESS</p>
@@ -250,7 +206,6 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 <a href="https://www.roblox.com/pt/games/121237444507033/AFK-Or-Play-For-UGC-Items" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
-
 <div class="script-card" data-name="Build A Star Garden">
 <h3>Star Garden</h3>
 <p>⭐KEYLESS</p>
@@ -259,7 +214,6 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 <a href="https://www.roblox.com/games/17216786206" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
-
 <div class="script-card" data-name="Get a UGC EMOTE">
 <h3>Get a UGC EMOTE</h3>
 <p>⭐KEYLESS</p>
@@ -268,7 +222,6 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 <a href="https://www.roblox.com/games/136079285555682/Get-a-UGC-EMOTE" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
-
 <div class="script-card" data-name="Merge The Kittens">
 <h3>Merge Kittens</h3>
 <p>⭐KEYLESS</p>
@@ -277,7 +230,6 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 <a href="https://www.roblox.com/games/11159328933" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
-
 <div class="script-card" data-name="Pop Box">
 <h3>Pop Box</h3>
 <p>⭐KEYLESS</p>
@@ -286,7 +238,6 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 <a href="https://www.roblox.com/games/112184852457409/Pop-Box" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
-
 <div class="script-card" data-name="Spin 4 UGC">
 <h3>Spin 4 UGC</h3>
 <p>⭐KEYLESS</p>
@@ -295,7 +246,6 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 <a href="https://www.roblox.com/games/16070671286/SPIN-4-UGC" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
-
 <div class="script-card" data-name="Afk For Ugc">
 <h3>Afk For Ugc</h3>
 <p>⭐KEYLESS</p>
@@ -304,7 +254,6 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 <a href="https://www.roblox.com/games/111077326659419" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
-
 <div class="script-card" data-name="Strongman Simulator">
 <h3>Strongman Sim</h3>
 <p>🚀INSTANT UGC</p>
@@ -313,7 +262,6 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 <a href="https://www.roblox.com/games/6766156863/Strongman-Simulator" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
-
 <div class="script-card" data-name="Paradise RP Script 1">
 <h3>Paradise RP 1</h3>
 <p>🚀INSTANT UGC</p>
@@ -322,7 +270,6 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 <a href="https://www.roblox.com/it/games/13421266463/Paradise-RP" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
-
 <div class="script-card" data-name="Paradise RP Script 2">
 <h3>Paradise RP 2</h3>
 <p>🚀INSTANT UGC</p>
@@ -331,7 +278,6 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 <a href="https://www.roblox.com/games/13421266463/Paradise-RP" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
-
 <div class="script-card" data-name="Taptors UGC Item Claims">
 <div style="display:flex;justify-content:space-between;align-items:center">
 <h3>Taptors UGC</h3>
@@ -348,7 +294,6 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 <div class="dropdown-item"><span>Join Group</span><button class="btn btn-copy btn-small" onclick="event.stopPropagation(); copyLink('https://www.roblox.com/communities/34014348/Taptors-UGC#!/about')">Copy Link</button></div>
 </div>
 </div>
-
 <div class="script-card" data-name="Free UGC Obby">
 <h3>Afk For Ugc</h3>
 <p>⭐KEYLESS</p>
@@ -357,7 +302,6 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 <a href="https://www.roblox.com/games/77027899546702/Free-UGC-Obby" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
-
 <div class="script-card" data-name="Helios Cinema Tycoon">
 <h3>Cinema Tycoon</h3>
 <p>⭐KEYLESS</p>
@@ -366,7 +310,6 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 <a href="https://www.roblox.com/games/140422012851942/Helios-Cinema-Tycoon" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
-
 <div class="script-card" data-name="Cyberpunk Outfits UGCs">
 <h3>Cyberpunk UGC</h3>
 <p>🚀INSTANT UGC</p>
@@ -375,7 +318,6 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 <a href="https://www.roblox.com/games/71930642556524/Cyberpunk-Outfits-UGCs" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
-
 <div class="script-card" data-name="BBC Wonder Chase Winter Sports">
 <h3>BBC Wonder Chase</h3>
 <p>⭐KEYLESS</p>
@@ -384,7 +326,6 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 <a href="https://www.roblox.com/games/16351911381/BBC-Wonder-Chase-Winter-Sports" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
-
 <div class="script-card" data-name="Escape Tsunami For UGC">
 <h3>Tsunami For Ugc</h3>
 <p>⭐KEYLESS</p>
@@ -393,7 +334,6 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 <a href="https://www.roblox.com/games/98999164981806/Escape-Tsunami-For-UGC" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
-
 <div class="script-card" data-name="Escape Tsunami For Baddies">
 <h3>Tsunami For Baddies</h3>
 <p>⭐KEYLESS</p>
@@ -402,7 +342,6 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 <a href="https://www.roblox.com/games/136070343234480/Escape-Tsunami-For-Baddies" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
-
 <div class="script-card" data-name="Collect For Ugc">
 <h3>Collect For Ugc</h3>
 <p>⭐KEYLESS</p>
@@ -411,51 +350,24 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 <a href="https://www.roblox.com/games/17103905229" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
-
 </div>
 </div>
-
 <script>
-const canvas=document.getElementById("particle-canvas"),ctx=canvas.getContext("2d")
-let particles=[]
+const canvas=document.getElementById("particle-canvas"),ctx=canvas.getContext("2d");
+let particles=[],mouse={x:null,y:null,radius:150};
+window.addEventListener('mousemove',e=>{mouse.x=e.x;mouse.y=e.y});
 function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight}
-window.addEventListener("resize",resize);resize()
-class Particle{constructor(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.size=Math.random()*1.5;this.speedX=Math.random()*0.6-0.3;this.speedY=Math.random()*0.6-0.3}update(){this.x+=this.speedX;this.y+=this.speedY;if(this.x>canvas.width)this.x=0;if(this.x<0)this.x=canvas.width;if(this.y>canvas.height)this.y=0;if(this.y<0)this.y=canvas.height}draw(){ctx.fillStyle="rgba(255,255,255,0.2)";ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.fill()}}
-function init(){for(let i=0;i<120;i++)particles.push(new Particle());updateCount()}
-function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach(p=>{p.update();p.draw()});requestAnimationFrame(animate)}
+window.addEventListener("resize",resize);resize();
+class Particle{constructor(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.size=Math.random()*2+1;this.baseX=this.x;this.baseY=this.y;this.density=(Math.random()*30)+1;this.vx=Math.random()*2-1;this.vy=Math.random()*2-1}update(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>canvas.width)this.vx*=-1;if(this.y<0||this.y>canvas.height)this.vy*=-1;let dx=mouse.x-this.x,dy=mouse.y-this.y,dist=Math.sqrt(dx*dx+dy*dy);if(dist<mouse.radius){let force=(mouse.radius-dist)/mouse.radius,dirX=dx/dist,dirY=dy/dist;this.x-=dirX*force*5;this.y-=dirY*force*5}}draw(){ctx.fillStyle="rgba(255,255,255,0.4)";ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.fill()}}
+function init(){particles=[];for(let i=0;i<100;i++)particles.push(new Particle());updateCount()}
+function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);for(let i=0;i<particles.length;i++){particles[i].update();particles[i].draw();for(let j=i;j<particles.length;j++){let dx=particles[i].x-particles[j].x,dy=particles[i].y-particles[j].y,dist=Math.sqrt(dx*dx+dy*dy);if(dist<120){ctx.strokeStyle=`rgba(255,255,255,${1-(dist/120)*0.5})`;ctx.lineWidth=0.5;ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(particles[j].x,particles[j].y);ctx.stroke()}}}requestAnimationFrame(animate)}
 function updateCount(){document.getElementById("scriptCount").innerText=document.querySelectorAll(".script-card").length}
 function filterScripts(){let i=document.getElementById("searchInput").value.toLowerCase(),c=document.getElementsByClassName("script-card");for(let k of c){let n=k.getAttribute("data-name").toLowerCase();k.style.display=n.includes(i)?"block":"none"}}
-
-// NEW TOAST FUNCTION
-function showToast(message) {
-    const container = document.getElementById('toast-container');
-    const toast = document.createElement('div');
-    toast.className = 'toast';
-    toast.innerHTML = `<span class="toast-icon">✓</span> ${message}`;
-    container.appendChild(toast);
-
-    // Trigger animation
-    setTimeout(() => toast.classList.add('show'), 100);
-
-    // Remove toast after 3 seconds
-    setTimeout(() => {
-        toast.classList.remove('show');
-        setTimeout(() => toast.remove(), 400);
-    }, 3000);
-}
-
-function copyScript(b){
-    navigator.clipboard.writeText(b.getAttribute("data-script"));
-    showToast("Script copied to clipboard!");
-}
-
-function copyLink(u){
-    navigator.clipboard.writeText(u);
-    showToast("Link copied to clipboard!");
-}
-
+function showToast(m){const c=document.getElementById('toast-container'),t=document.createElement('div');t.className='toast';t.innerHTML=`<span class="toast-icon">✓</span> ${m}`;c.appendChild(t);setTimeout(()=>t.classList.add('show'),100);setTimeout(()=>{t.classList.remove('show');setTimeout(()=>t.remove(),400)},3000)}
+function copyScript(b){navigator.clipboard.writeText(b.getAttribute("data-script"));showToast("Script copied to clipboard!")}
+function copyLink(u){navigator.clipboard.writeText(u);showToast("Link copied to clipboard!")}
 function toggleDropdown(e){const c=e.closest(".script-card").querySelector(".dropdown-content");const o=c.style.display==="block";c.style.display=o?"none":"block";e.classList.toggle("open",!o)}
-init();animate()
+init();animate();
 </script>
 </body>
 </html>
