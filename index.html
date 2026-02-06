@@ -16,26 +16,28 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 .search-bar{width:100%;max-width:600px;padding:18px 30px;border-radius:15px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.03);color:white;font-size:16px;outline:none;backdrop-filter:blur(15px);transition:all .3s ease;box-shadow:0 10px 30px rgba(0,0,0,0.5)}
 .search-bar:focus{border-color:rgba(255,255,255,0.4);background:rgba(255,255,255,0.07);box-shadow:0 0 20px rgba(255,255,255,0.05)}
 .script-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:25px;align-items:start}
-.script-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);padding:24px;border-radius:20px;backdrop-filter:blur(10px);transition:all .3s cubic-bezier(0.4,0,0.2,1);position:relative;overflow:hidden}
+.script-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);padding:24px;border-radius:20px;backdrop-filter:blur(10px);transition:all .3s cubic-bezier(0.4,0,0.2,1);position:relative;overflow:hidden;opacity:0;transform:translateY(20px)}
+.script-card.visible{opacity:1;transform:translateY(0)}
 .script-card::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent);transition:0.5s}
 .script-card:hover::after{left:100%}
 .script-card:hover{transform:translateY(-8px);border-color:rgba(255,255,255,0.2);background:rgba(255,255,255,0.06);box-shadow:0 15px 40px rgba(0,0,0,0.4)}
-.script-card h3{margin:0 0 8px 0;font-size:20px;color:#fff;font-weight:700}
-.script-card p{margin:0 0 20px 0;font-size:14px;color:#bbb;font-weight:600}
+.script-card h3{margin:0 0 15px 0;font-size:20px;color:#fff;font-weight:700}
+.status-working{font-size:11px;color:#00ff88;display:flex;align-items:center;gap:5px;margin-bottom:10px;font-weight:700;text-transform:uppercase}
+.status-working::before{content:'';width:8px;height:8px;background:#00ff88;border-radius:50%;display:inline-block;box-shadow:0 0 8px #00ff88}
 .btn-group{display:flex;gap:12px}
 .btn{flex:1;padding:12px;border:none;border-radius:10px;cursor:pointer;font-weight:700;transition:all .2s;text-align:center;text-decoration:none;font-size:13px}
 .btn-copy{background:#fff;color:#000}
 .btn-game{background:rgba(255,255,255,0.08);color:#fff;border:1px solid rgba(255,255,255,0.2)}
 .btn:hover{filter:brightness(0.9);transform:scale(1.02)}
+#toast-container{position:fixed;bottom:30px;right:30px;z-index:9999}
+.toast{background:rgba(255,255,255,0.1);backdrop-filter:blur(15px);border:1px solid rgba(255,255,255,0.2);color:white;padding:16px 24px;border-radius:12px;margin-top:10px;box-shadow:0 10px 30px rgba(0,0,0,0.5);display:flex;align-items:center;gap:12px;transform:translateX(120%);transition:transform 0.4s cubic-bezier(0.68,-0.55,0.265,1.55)}
+.toast.show{transform:translateX(0)}
+.toast-icon{color:#00ff88;font-weight:bold}
 .dropdown-toggle{cursor:pointer;font-size:14px;color:#666;transition:0.3s}
 .dropdown-toggle.open{transform:rotate(90deg);color:#fff}
 .dropdown-content{display:none;margin-top:20px;border-top:1px solid rgba(255,255,255,0.1);padding-top:15px}
 .dropdown-item{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:13px;color:#aaa}
 .btn-small{padding:6px 14px;font-size:11px;flex:none;border-radius:6px}
-#toast-container{position:fixed;bottom:30px;right:30px;z-index:9999}
-.toast{background:rgba(255,255,255,0.1);backdrop-filter:blur(15px);border:1px solid rgba(255,255,255,0.2);color:white;padding:16px 24px;border-radius:12px;margin-top:10px;box-shadow:0 10px 30px rgba(0,0,0,0.5);display:flex;align-items:center;gap:12px;transform:translateX(120%);transition:transform 0.4s cubic-bezier(0.68,-0.55,0.265,1.55)}
-.toast.show{transform:translateX(0)}
-.toast-icon{color:#00ff88;font-weight:bold}
 </style>
 </head>
 <body>
@@ -47,7 +49,7 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 <div class="stats-badge">
 <span>Database:</span>
 <span id="scriptCount" class="stats-count">0</span>
-<span>Scripts Loaded</span>
+<span>Scripts</span>
 </div>
 </div>
 <div class="search-section">
@@ -55,235 +57,235 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 </div>
 <div class="script-grid" id="scriptContainer">
 <div class="script-card" data-name="SOUR PATCH KIDS Mischief Tycoon">
+<div class="status-working">Working</div>
 <h3>Sour Patch Tycoon</h3>
-<p>⭐KEYLESS</p>
 <div class="btn-group">
 <button class="btn btn-copy" onclick="copyScript(this)" data-script='loadstring(game:HttpGet("https://raw.githubusercontent.com/asuza999/officialnyzscripts-/refs/heads/main/sourpatchtycoon.lua.txt"))()'>Copy Script</button>
 <a href="https://www.roblox.com/games/16984716324/SOUR-PATCH-KIDS-Mischief-Tycoon" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
 <div class="script-card" data-name="AP FOODZIKI">
+<div class="status-working">Working</div>
 <h3>Grab The Foodzik</h3>
-<p>⭐KEYLESS</p>
 <div class="btn-group">
 <button class="btn btn-copy" onclick="copyScript(this)" data-script='loadstring(game:HttpGet("https://raw.githubusercontent.com/asuza999/officialnyzscripts-/refs/heads/main/foodzikcreatedbynyzscriptsbtw.lua.txt"))()'>Copy Script</button>
 <a href="https://www.roblox.com/games/78403106549851/AP-FOODZIKI" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
 <div class="script-card" data-name="Pacsun Los Angeles Tycoon">
+<div class="status-working">Working</div>
 <h3>Pacsun Tycoon</h3>
-<p>⭐KEYLESS</p>
 <div class="btn-group">
 <button class="btn btn-copy" onclick="copyScript(this)" data-script='loadstring(game:HttpGet("https://raw.githubusercontent.com/asuza999/autotycoon/refs/heads/main/pacsunautotycoon.lua.txt"))()'>Copy Script</button>
 <a href="https://www.roblox.com/games/11258371342/Pacsun-Los-Angeles-Tycoon" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
 <div class="script-card" data-name="Collect Brainrots for UGC">
+<div class="status-working">Working</div>
 <h3>Collect Brainrots for UGC</h3>
-<p>⭐KEYLESS</p>
 <div class="btn-group">
 <button class="btn btn-copy" onclick="copyScript(this)" data-script='loadstring(game:HttpGet("https://raw.githubusercontent.com/asuza999/officialnyzscripts-/refs/heads/main/oldcollectbrainrotforugc.lua.txt"))()'>Copy Script</button>
 <a href="https://www.roblox.com/games/78937301123654/SOON-Collect-Brainrots-for-UGC" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
 <div class="script-card" data-name="Donation Clicker">
+<div class="status-working">Working</div>
 <h3>Donation Clicker</h3>
-<p>⭐KEYLESS</p>
 <div class="btn-group">
 <button class="btn btn-copy" onclick="copyScript(this)" data-script='loadstring(game:HttpGet("https://raw.githubusercontent.com/asuza999/autoclickfreerobuxlmao/refs/heads/main/autoclickerfreerobuxfr.lua.txt"))()'>Copy Script</button>
 <a href="https://www.roblox.com/id/games/114397553889292/Donation-Clicker" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
 <div class="script-card" data-name="Hex Mall Play Win Wear">
+<div class="status-working">Working</div>
 <h3>Hex Mall</h3>
-<p>⭐KEYLESS</p>
 <div class="btn-group">
 <button class="btn btn-copy" onclick="copyScript(this)" data-script='loadstring(game:HttpGet("https://raw.githubusercontent.com/asuza999/officialnyzscripts-/refs/heads/main/hexmallmuehwhwhhehe.lua.txt"))()'>Copy Script</button>
 <a href="https://www.roblox.com/games/18394280972/Hex-Mall-Play-Win-Wear" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
 <div class="script-card" data-name="Punch Simulator">
+<div class="status-working">Working</div>
 <h3>Punch Simulator</h3>
-<p>⭐KEYLESS</p>
 <div class="btn-group">
 <button class="btn btn-copy" onclick="copyScript(this)" data-script='loadstring(game:HttpGet("https://raw.githubusercontent.com/asuza999/punchsim/refs/heads/main/instantdefeatboss.lua.txt"))()'>Copy Script</button>
 <a href="https://www.roblox.com/games/14236123211/Punch-Simulator" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
 <div class="script-card" data-name="UGC Obby">
+<div class="status-working">Working</div>
 <h3>UGC Obby</h3>
-<p>⭐KEYLESS</p>
 <div class="btn-group">
 <button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet('https://raw.githubusercontent.com/asuza999/bypassed/refs/heads/main/nyzontop404.lua.txt'))()">Copy Script</button>
 <a href="https://www.roblox.com/games/88646166375915/UGC-Obby" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
 <div class="script-card" data-name="Speed Champions">
+<div class="status-working">Working</div>
 <h3>Speed Champions</h3>
-<p>⭐KEYLESS</p>
 <div class="btn-group">
 <button class="btn btn-copy" onclick="copyScript(this)" data-script='loadstring(game:HttpGet("https://raw.githubusercontent.com/svrnaexploits/nyzscripts/refs/heads/main/speedchampionlagfixed.lua", true))()'>Copy Script</button>
 <a href="https://www.roblox.com/games/4539184430/Speed-Champions" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
 <div class="script-card" data-name="Расти-Круши Unnamed">
+<div class="status-working">Working</div>
 <h3>Расти-Круши</h3>
-<p>⭐KEYLESS</p>
 <div class="btn-group">
 <button class="btn btn-copy" onclick="copyScript(this)" data-script='loadstring(game:HttpGet("https://pastefy.app/dUVPbfR9/raw"))()'>Copy Script</button>
 <a href="https://www.roblox.com/games/138161387114938/unnamed" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
 <div class="script-card" data-name="Obby for UGC">
+<div class="status-working">Working</div>
 <h3>Obby for UGC</h3>
-<p>⭐KEYLESS</p>
 <div class="btn-group">
 <button class="btn btn-copy" onclick="copyScript(this)" data-script='loadstring(game:HttpGet("https://raw.githubusercontent.com/asuza999/collectforugc/refs/heads/main/autocollectcoinsgift.lua.txt"))()'>Copy Script</button>
 <a href="https://www.roblox.com/games/104986251086858/Obby-for-UGC" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
 <div class="script-card" data-name="РОБЛОГРАД: МИР ПРАЗДНИК">
+<div class="status-working">Working</div>
 <h3>РОБЛОГРАД</h3>
-<p>⭐KEYLESS</p>
 <div class="btn-group">
 <button class="btn btn-copy" onclick="copyScript(this)" data-script='loadstring(game:HttpGet("https://pastefy.app/azI6DfVa/raw"))()'>Copy Script</button>
 <a href="https://www.roblox.com/games/109351177126111/unnamed" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
 <div class="script-card" data-name="BBC Wonder Chase Winter Sports New">
+<div class="status-working">Working</div>
 <h3>BBC Wonder Chase</h3>
-<p>⭐KEYLESS</p>
 <div class="btn-group">
 <button class="btn btn-copy" onclick="copyScript(this)" data-script='loadstring(game:HttpGet("https://raw.githubusercontent.com/svrnaexploits/nyzscripts/refs/heads/main/wonderchaseass.lua"))()'>Copy Script</button>
 <a href="https://www.roblox.com/games/16351911381/BBC-Wonder-Chase-Winter-Sports" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
 <div class="script-card" data-name="MR BEAST LAND Riyadh Season">
+<div class="status-working">Working</div>
 <h3>Riyadh Season</h3>
-<p>🚀INSTANT UGC</p>
 <div class="btn-group">
 <button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet(&quot;https://raw.githubusercontent.com/asuza999/instantugc/refs/heads/main/universalfiretouchinterests.lua.txt&quot;))()">Copy Script</button>
 <a href="https://www.roblox.com/games/104730645994648/MR-BEAST-LAND-Riyadh-Season" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
 <div class="script-card" data-name="Livetopia RP">
+<div class="status-working">Working</div>
 <h3>Livetopia RP</h3>
-<p>🚀INSTANT UGC</p>
 <div class="btn-group">
 <button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet(&quot;https://protected-roblox-scripts.onrender.com/88ffbc8b969f6b22f6f5fb9cd2ae5372&quot;))()">Copy Script</button>
 <a href="https://www.roblox.com/games/6737970321/Livetopia-RP" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
 <div class="script-card" data-name="Grubby">
+<div class="status-working">Working</div>
 <h3>Finding Grubby</h3>
-<p>⭐KEYLESS</p>
 <div class="btn-group">
 <button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet(&quot;https://raw.githubusercontent.com/asuza999/autocollectbutbetter/refs/heads/main/grubby.lua.txt&quot;))()">Copy Script</button>
 <a href="https://www.roblox.com/games/90029482000377/Grubby" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
 <div class="script-card" data-name="Pass The Brainrot">
+<div class="status-working">Working</div>
 <h3>Pass The Brainrot</h3>
-<p>⭐KEYLESS</p>
 <div class="btn-group">
 <button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet('https://raw.githubusercontent.com/asuza999/svrnapassthebrainrotv3/refs/heads/main/svrnaisonlinev3.lua'))()">Copy Script</button>
 <a href="https://www.roblox.com/games/132065622827243/Pass-The-Brainrot" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
 <div class="script-card" data-name="Obby For Free Rewards">
+<div class="status-working">Working</div>
 <h3>Obby For Rewards</h3>
-<p>⭐KEYLESS</p>
 <div class="btn-group">
 <button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet(&quot;https://raw.githubusercontent.com/asuza999/influcknyzontop/refs/heads/main/influcknyzontoptendcheckpoint.lua.txt&quot;))()">Copy Script</button>
 <a href="https://www.roblox.com/games/103719498213854/Obby-For-Free-Rewards" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
 <div class="script-card" data-name="AFK Or Play For UGC Items">
+<div class="status-working">Working</div>
 <h3>AFK For UGC</h3>
-<p>⭐KEYLESS</p>
 <div class="btn-group">
 <button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet(&quot;https://raw.githubusercontent.com/asuza999/officialnyzscripts-/refs/heads/main/afkforugc.lua.txt&quot;))()">Copy Script</button>
 <a href="https://www.roblox.com/pt/games/121237444507033/AFK-Or-Play-For-UGC-Items" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
 <div class="script-card" data-name="Build A Star Garden">
+<div class="status-working">Working</div>
 <h3>Star Garden</h3>
-<p>⭐KEYLESS</p>
 <div class="btn-group">
 <button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet(&quot;https://raw.githubusercontent.com/asuza999/justasimplescript/refs/heads/main/autocollectstars.lua.txt&quot;))()">Copy Script</button>
 <a href="https://www.roblox.com/games/17216786206" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
 <div class="script-card" data-name="Get a UGC EMOTE">
+<div class="status-working">Working</div>
 <h3>Get a UGC EMOTE</h3>
-<p>⭐KEYLESS</p>
 <div class="btn-group">
 <button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet(&quot;https://raw.githubusercontent.com/asuza999/officialnyzscripts-/refs/heads/main/universalfiretouchinterests69.lua.txt&quot;))()">Copy Script</button>
 <a href="https://www.roblox.com/games/136079285555682/Get-a-UGC-EMOTE" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
 <div class="script-card" data-name="Merge The Kittens">
+<div class="status-working">Working</div>
 <h3>Merge Kittens</h3>
-<p>⭐KEYLESS</p>
 <div class="btn-group">
 <button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet(&quot;https://raw.githubusercontent.com/asuza999/ugc/refs/heads/main/mergedthekittensfixed.lua.txt&quot;))()">Copy Script</button>
 <a href="https://www.roblox.com/games/11159328933" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
 <div class="script-card" data-name="Pop Box">
+<div class="status-working">Working</div>
 <h3>Pop Box</h3>
-<p>⭐KEYLESS</p>
 <div class="btn-group">
 <button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet(&quot;https://raw.githubusercontent.com/asuza999/pop/refs/heads/main/popbox.lua.txt&quot;))()">Copy Script</button>
 <a href="https://www.roblox.com/games/112184852457409/Pop-Box" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
 <div class="script-card" data-name="Spin 4 UGC">
+<div class="status-working">Working</div>
 <h3>Spin 4 UGC</h3>
-<p>⭐KEYLESS</p>
 <div class="btn-group">
 <button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet('https://raw.githubusercontent.com/svrnaexploits/loltreehouse/refs/heads/main/treehouse.lua'))()">Copy Script</button>
 <a href="https://www.roblox.com/games/16070671286/SPIN-4-UGC" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
 <div class="script-card" data-name="Afk For Ugc">
+<div class="status-working">Working</div>
 <h3>Afk For Ugc</h3>
-<p>⭐KEYLESS</p>
 <div class="btn-group">
 <button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet('https://protected-roblox-scripts.onrender.com/66f1aa0e36ce654b7ced43bee74f1184'))()">Copy Script</button>
 <a href="https://www.roblox.com/games/111077326659419" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
 <div class="script-card" data-name="Strongman Simulator">
+<div class="status-working">Working</div>
 <h3>Strongman Sim</h3>
-<p>🚀INSTANT UGC</p>
 <div class="btn-group">
 <button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet('https://raw.githubusercontent.com/svrnaexploits/nyzscripts/refs/heads/main/instant'))()">Copy Script</button>
 <a href="https://www.roblox.com/games/6766156863/Strongman-Simulator" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
 <div class="script-card" data-name="Paradise RP Script 1">
+<div class="status-working">Working</div>
 <h3>Paradise RP 1</h3>
-<p>🚀INSTANT UGC</p>
 <div class="btn-group">
 <button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet('https://raw.githubusercontent.com/asuza999/pleasegiveacreditbeforeshowcasing/refs/heads/main/instantugcparadisorp.lua.txt'))()">Copy Script</button>
 <a href="https://www.roblox.com/it/games/13421266463/Paradise-RP" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
 <div class="script-card" data-name="Paradise RP Script 2">
+<div class="status-working">Working</div>
 <h3>Paradise RP 2</h3>
-<p>🚀INSTANT UGC</p>
 <div class="btn-group">
 <button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet('https://pastefy.app/PmlvkcgZ/raw'))()">Copy Script</button>
 <a href="https://www.roblox.com/games/13421266463/Paradise-RP" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
 <div class="script-card" data-name="Taptors UGC Item Claims">
+<div class="status-working">Working</div>
 <div style="display:flex;justify-content:space-between;align-items:center">
 <h3>Taptors UGC</h3>
 <span class="dropdown-toggle" onclick="toggleDropdown(this)">▶</span>
 </div>
-<p>⭐KEYLESS</p>
 <div class="btn-group">
 <button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet(&quot;https://raw.githubusercontent.com/asuza999/nyzontop/refs/heads/main/proximityprompt.lua.txt&quot;))()">Copy Script</button>
 <a href="https://www.roblox.com/games/121573674290343/Taptors-UGC-Item-Claims" target="_blank" class="btn btn-game">Game Link</a>
@@ -295,56 +297,56 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 </div>
 </div>
 <div class="script-card" data-name="Free UGC Obby">
+<div class="status-working">Working</div>
 <h3>Afk For Ugc</h3>
-<p>⭐KEYLESS</p>
 <div class="btn-group">
 <button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet('https://raw.githubusercontent.com/asuza999/bypassed/refs/heads/main/nyzontop404.lua.txt'))()">Copy Script</button>
 <a href="https://www.roblox.com/games/77027899546702/Free-UGC-Obby" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
 <div class="script-card" data-name="Helios Cinema Tycoon">
+<div class="status-working">Working</div>
 <h3>Cinema Tycoon</h3>
-<p>⭐KEYLESS</p>
 <div class="btn-group">
 <button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()">Copy Script</button>
 <a href="https://www.roblox.com/games/140422012851942/Helios-Cinema-Tycoon" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
 <div class="script-card" data-name="Cyberpunk Outfits UGCs">
+<div class="status-working">Working</div>
 <h3>Cyberpunk UGC</h3>
-<p>🚀INSTANT UGC</p>
 <div class="btn-group">
 <button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet('https://raw.githubusercontent.com/svrnaexploits/ugc/refs/heads/main/instantugc'))()">Copy Script</button>
 <a href="https://www.roblox.com/games/71930642556524/Cyberpunk-Outfits-UGCs" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
 <div class="script-card" data-name="BBC Wonder Chase Winter Sports">
+<div class="status-working">Working</div>
 <h3>BBC Wonder Chase</h3>
-<p>⭐KEYLESS</p>
 <div class="btn-group">
 <button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet('https://raw.githubusercontent.com/asuza999/ugc2/refs/heads/main/wonderchaseupdatedscript.lua.txt'))()">Copy Script</button>
 <a href="https://www.roblox.com/games/16351911381/BBC-Wonder-Chase-Winter-Sports" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
 <div class="script-card" data-name="Escape Tsunami For UGC">
+<div class="status-working">Working</div>
 <h3>Tsunami For Ugc</h3>
-<p>⭐KEYLESS</p>
 <div class="btn-group">
 <button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet('https://raw.githubusercontent.com/svrnaexploits/ugc/refs/heads/main/etfugc'))()">Copy Script</button>
 <a href="https://www.roblox.com/games/98999164981806/Escape-Tsunami-For-UGC" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
 <div class="script-card" data-name="Escape Tsunami For Baddies">
+<div class="status-working">Working</div>
 <h3>Tsunami For Baddies</h3>
-<p>⭐KEYLESS</p>
 <div class="btn-group">
 <button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet('https://raw.githubusercontent.com/svrnaexploits/ugc/refs/heads/main/esfb'))()">Copy Script</button>
 <a href="https://www.roblox.com/games/136070343234480/Escape-Tsunami-For-Baddies" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
 <div class="script-card" data-name="Collect For Ugc">
+<div class="status-working">Working</div>
 <h3>Collect For Ugc</h3>
-<p>⭐KEYLESS</p>
 <div class="btn-group">
 <button class="btn btn-copy" onclick="copyScript(this)" data-script='loadstring(game:HttpGet("https://raw.githubusercontent.com/asuza999/nyz/refs/heads/main/autocollectbypassedanticheatjantwentyfourtwentytwentysix.lua.txt"))()'>Copy Script</button>
 <a href="https://www.roblox.com/games/17103905229" target="_blank" class="btn btn-game">Game Link</a>
@@ -358,9 +360,10 @@ let particles=[],mouse={x:null,y:null,radius:150};
 window.addEventListener('mousemove',e=>{mouse.x=e.x;mouse.y=e.y});
 function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight}
 window.addEventListener("resize",resize);resize();
-class Particle{constructor(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.size=Math.random()*2+1;this.baseX=this.x;this.baseY=this.y;this.density=(Math.random()*30)+1;this.vx=Math.random()*2-1;this.vy=Math.random()*2-1}update(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>canvas.width)this.vx*=-1;if(this.y<0||this.y>canvas.height)this.vy*=-1;let dx=mouse.x-this.x,dy=mouse.y-this.y,dist=Math.sqrt(dx*dx+dy*dy);if(dist<mouse.radius){let force=(mouse.radius-dist)/mouse.radius,dirX=dx/dist,dirY=dy/dist;this.x-=dirX*force*5;this.y-=dirY*force*5}}draw(){ctx.fillStyle="rgba(255,255,255,0.4)";ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.fill()}}
-function init(){particles=[];for(let i=0;i<100;i++)particles.push(new Particle());updateCount()}
+class Particle{constructor(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.size=Math.random()*2+1;this.vx=Math.random()*2-1;this.vy=Math.random()*2-1}update(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>canvas.width)this.vx*=-1;if(this.y<0||this.y>canvas.height)this.vy*=-1;let dx=mouse.x-this.x,dy=mouse.y-this.y,dist=Math.sqrt(dx*dx+dy*dy);if(dist<mouse.radius){let force=(mouse.radius-dist)/mouse.radius,dirX=dx/dist,dirY=dy/dist;this.x-=dirX*force*5;this.y-=dirY*force*5}}draw(){ctx.fillStyle="rgba(255,255,255,0.4)";ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.fill()}}
+function init(){particles=[];for(let i=0;i<100;i++)particles.push(new Particle());updateCount();animateCards()}
 function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);for(let i=0;i<particles.length;i++){particles[i].update();particles[i].draw();for(let j=i;j<particles.length;j++){let dx=particles[i].x-particles[j].x,dy=particles[i].y-particles[j].y,dist=Math.sqrt(dx*dx+dy*dy);if(dist<120){ctx.strokeStyle=`rgba(255,255,255,${1-(dist/120)*0.5})`;ctx.lineWidth=0.5;ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(particles[j].x,particles[j].y);ctx.stroke()}}}requestAnimationFrame(animate)}
+function animateCards(){const cards=document.querySelectorAll('.script-card');cards.forEach((card,index)=>{setTimeout(()=>{card.classList.add('visible')},index*50)})}
 function updateCount(){document.getElementById("scriptCount").innerText=document.querySelectorAll(".script-card").length}
 function filterScripts(){let i=document.getElementById("searchInput").value.toLowerCase(),c=document.getElementsByClassName("script-card");for(let k of c){let n=k.getAttribute("data-name").toLowerCase();k.style.display=n.includes(i)?"block":"none"}}
 function showToast(m){const c=document.getElementById('toast-container'),t=document.createElement('div');t.className='toast';t.innerHTML=`<span class="toast-icon">✓</span> ${m}`;c.appendChild(t);setTimeout(()=>t.classList.add('show'),100);setTimeout(()=>{t.classList.remove('show');setTimeout(()=>t.remove(),400)},3000)}
