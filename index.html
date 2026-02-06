@@ -32,10 +32,39 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 .dropdown-content{display:none;margin-top:20px;border-top:1px solid rgba(255,255,255,0.1);padding-top:15px}
 .dropdown-item{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:13px;color:#aaa}
 .btn-small{padding:6px 14px;font-size:11px;flex:none;border-radius:6px}
+
+/* Toast Notification Styles */
+#toast-container {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 9999;
+}
+.toast {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 16px 24px;
+    border-radius: 12px;
+    margin-top: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transform: translateX(120%);
+    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+.toast.show { transform: translateX(0); }
+.toast-icon { color: #00ff88; font-weight: bold; }
 </style>
 </head>
 <body>
 <canvas id="particle-canvas"></canvas>
+
+<!-- Toast Container -->
+<div id="toast-container"></div>
+
 <div class="ui-layer" id="main-content">
 <div class="header-flex">
 <div class="logo">NYZ SCRIPTS</div>
@@ -50,6 +79,7 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 </div>
 <div class="script-grid" id="scriptContainer">
 
+<!-- SOUR PATCH KIDS Card -->
 <div class="script-card" data-name="SOUR PATCH KIDS Mischief Tycoon">
 <h3>Sour Patch Tycoon</h3>
 <p>⭐KEYLESS</p>
@@ -377,13 +407,14 @@ body,html{margin:0;padding:0;width:100%;height:100%;background:#050505;color:whi
 <h3>Collect For Ugc</h3>
 <p>⭐KEYLESS</p>
 <div class="btn-group">
-<button class="btn btn-copy" onclick="copyScript(this)" data-script="loadstring(game:HttpGet('https://raw.githubusercontent.com/asuza999/nyz/refs/heads/main/autocollectbypassedanticheatjantwentyfourtwentytwentysix.lua.txt'))()">Copy Script</button>
+<button class="btn btn-copy" onclick="copyScript(this)" data-script='loadstring(game:HttpGet("https://raw.githubusercontent.com/asuza999/nyz/refs/heads/main/autocollectbypassedanticheatjantwentyfourtwentytwentysix.lua.txt"))()'>Copy Script</button>
 <a href="https://www.roblox.com/games/17103905229" target="_blank" class="btn btn-game">Game Link</a>
 </div>
 </div>
 
 </div>
 </div>
+
 <script>
 const canvas=document.getElementById("particle-canvas"),ctx=canvas.getContext("2d")
 let particles=[]
@@ -394,8 +425,35 @@ function init(){for(let i=0;i<120;i++)particles.push(new Particle());updateCount
 function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach(p=>{p.update();p.draw()});requestAnimationFrame(animate)}
 function updateCount(){document.getElementById("scriptCount").innerText=document.querySelectorAll(".script-card").length}
 function filterScripts(){let i=document.getElementById("searchInput").value.toLowerCase(),c=document.getElementsByClassName("script-card");for(let k of c){let n=k.getAttribute("data-name").toLowerCase();k.style.display=n.includes(i)?"block":"none"}}
-function copyScript(b){navigator.clipboard.writeText(b.getAttribute("data-script"));alert("Copied to clipboard.")}
-function copyLink(u){navigator.clipboard.writeText(u);alert("Link copied.")}
+
+// NEW TOAST FUNCTION
+function showToast(message) {
+    const container = document.getElementById('toast-container');
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.innerHTML = `<span class="toast-icon">✓</span> ${message}`;
+    container.appendChild(toast);
+
+    // Trigger animation
+    setTimeout(() => toast.classList.add('show'), 100);
+
+    // Remove toast after 3 seconds
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 400);
+    }, 3000);
+}
+
+function copyScript(b){
+    navigator.clipboard.writeText(b.getAttribute("data-script"));
+    showToast("Script copied to clipboard!");
+}
+
+function copyLink(u){
+    navigator.clipboard.writeText(u);
+    showToast("Link copied to clipboard!");
+}
+
 function toggleDropdown(e){const c=e.closest(".script-card").querySelector(".dropdown-content");const o=c.style.display==="block";c.style.display=o?"none":"block";e.classList.toggle("open",!o)}
 init();animate()
 </script>
